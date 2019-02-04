@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Trust-and-Verification</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<style type="text/css">
+h5{font-size: 16px; font-weight: bold;}
+.mobile-notifications-heading {
+    background-color: #edefed;
+    border-bottom: 1px solid #dce0e0;
+    border: 2px solid #dce0e0;
+    color: #565a5c;
+    font-size: 16px;
+    padding: 12px 0 12px 14px;
+}
+</style>
+
+<body>
+
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">  
+                    <li><img class="img-responsive" src="img/logo-white text.PNG" style="padding:12px 0 13px 27px; width:150px;"></li>            
+                    <li class="active">
+                        <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">LOADS</span> <span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li class="active"><a href="#">Find New Loads</a></li>
+                            <li><a href="#">Incoming Load Suggestions</a></li>
+                            <li><a href="#">Alerts</a></li>
+                            <!--<li><a href="#">Dashboard v.5 <span class="label label-primary pull-right">NEW</span></a></li>-->
+                         </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="fa fa-table"></i> <span class="nav-label">Planned Trips</span> </a>
+                        <ol class="nav nav-second-level">
+                            <li class="active"><a href="#">Today</a></li>
+                            <li><a href="#">Tomorrow</a></li>
+                            <li><a href="#"> Wed, Oct 6</a></li> <!--  or other according to what’s the day after tomorrow  -->
+                        </ol>    
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">MANAGE</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="#">Drivers</a></li>
+                            <li><a href="#">Trucks</a></li>
+                            <li><a href="#">Trips</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="fa fa-star"></i> <span class="nav-label">SETTINGS</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Organization</a></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+
+                    <!--<li style="padding-left:35px;"><a href="#"><span class="nav-label">Profile</span></a></li>
+                    <li style="padding-left:35px;"><a href="#"><span class="nav-label">Organization</span></a></li>
+                    <li style="padding-left:35px;"><a href="#"><span class="nav-label">Logout</span></a></li>-->
+                    
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <span class="m-r-sm text-muted welcome-message drv-invite-link"><a href="invite.html">+ Invite People</a></span>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-messages">
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img/a7.jpg">
+                                </a>
+                                <div class="media-body">
+                                    <small class="pull-right">46h ago</small>
+                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img/a4.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right text-navy">5h ago</small>
+                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="dropdown-messages-box">
+                                <a href="profile.html" class="pull-left">
+                                    <img alt="image" class="img-circle" src="img/profile.jpg">
+                                </a>
+                                <div class="media-body ">
+                                    <small class="pull-right">23h ago</small>
+                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="mailbox.html">
+                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-alerts">
+                        <li>
+                            <a href="mailbox.html">
+                                <div>
+                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="profile.html">
+                                <div>
+                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                    <span class="pull-right text-muted small">12 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="grid_options.html">
+                                <div>
+                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                    <span class="pull-right text-muted small">4 minutes ago</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="text-center link-block">
+                                <a href="notifications.html">
+                                    <strong>See All Alerts</strong>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="dropdown profile-dropdown">                   
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <span class="clear"> <span class="block m-t-xs profile-dropdown-txt"> Anibal &nbsp;<img alt="image" class="img-circle" src="img/profile_small.jpg" />
+                     </span>  </span> </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li><a href="notifications.html">Notifications</a></li>
+                        <li class="divider"></li>
+                        <li><a href="profile.html">Profile </a></li>
+                        <li class="divider"></li>
+                        <li><a href="trust-and-verification.html">Trust & Verification</a></li>
+                        <li class="divider"></li>
+                        <li><a href="payments.html">Payments</a></li>
+                        <li class="divider"></li>
+                        <li><a href="security.html">Security</a></li>
+                    </ul>   
+                </li>
+            </ul>
+
+        </nav>
+        </div>
+            <div class="row wrapper border-bottom white-bg page-heading">
+                <div class="col-lg-10">
+                    <h2>Notifications</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            Drivers
+                        </li>
+                        <li class="active">
+                            <strong>Trust & Verification</strong>
+                        </li>
+                    </ol>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+
+
+            <div class="wrapper wrapper-content animated fadeIn">
+
+                    <div class="row"> <!-- MOBILE AND EMAIL NOTIFICATIONS ROW START -->
+
+
+
+
+
+                        <div class="col-md-12">
+
+                            <div class="panel row-space-top-4">
+                              
+                                <section class="panel-body">
+                                <div class="row">
+                                  <div class="col-sm-8">
+                                    <h3>Verify Your ID</h3>
+                                    <p> Getting your Verified ID is the easiest way to help build trust in the Findacargo community. We’ll verify you by matching information from an online account to an official ID. <a href="#" style="color:#ff5a5f;">Learn more</a>
+                                    <br><br>
+                                Or, you can choose to only add the verifications you want below. </p>
+                                  </div>
+
+                                  <div class="col-sm-4" style="text-align:center; padding-top:44px;">
+                                        <input type="submit" value="Verify Me" class="btn btn-primary">
+                                  </div>
+
+                                </div>
+                                </section>
+                            </div>
+
+                        
+
+                            <div class="panel row-space-top-4">
+                              <div class="mobile-notifications-heading"> Your Current Verifications </div>
+                              <section class="panel-body">
+                                <div class="row">
+                                  <div class="col-sm-4">
+                                    <h3>Google</h3>
+                                    <p>Connect your Findacargo account to your Google account for simplicity and ease.</p>
+                                  </div>
+                                  <div class="col-sm-8" style="text-align:center; padding-top:44px;">                            
+                                        <input type="submit" value="Disconnect" class="btn btn-primary">
+                                  </div>
+                                </div>
+                              </section>
+                            </div>  
+
+
+                            <div class="panel row-space-top-4">
+                              <div class="mobile-notifications-heading"> Add More Verifications </div>
+                              <section class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3>Email Address</h3>
+                                        <p>Please verify your email address by clicking the link in the message we just sent to: syeed.ali92@gmail.com<br><br>Can’t find our message? Check your spam folder or <a href="#" style="color:#ff5a5f;">resend the confirmation email.</a></p>
+                                        <br><br>
+                                        <h3>Phone Number</h3>
+                                        <p>Make it easier to communicate with a verified phone number. We’ll send you a code by SMS or read it to you over the phone. Enter the code below to confirm that you’re the person on the other end.<br><br>Rest assured, your number is only shared with another Airbnb member once you have a confirmed booking.<br><br>No phone number entered<br><br>+ Add a phone number </p>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h3>Facebook</h3>
+                                        <p>Sign in with Facebook and discover your trusted connections to hosts and guests all over the world.</p>                                         
+                                    </div>
+                                    <div class="col-sm-8" style="text-align:center; padding-top:44px;">                            
+                                        <input type="submit" value="Connect" class="btn btn-primary" style="padding:6px 101px;">
+                                    </div>
+                                </div>
+                                <br><br>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h3>LinkedIn</h3>
+                                        <p>Create a link to your professional life by connecting your Findacargo and LinkedIn accounts.</p>                         
+                                    </div>
+                                    <div class="col-sm-8" style="text-align:center; padding-top:44px;">                            
+                                        <input type="submit" value="Connect" class="btn btn-primary" style="padding:6px 101px;">
+                                    </div>
+                                </div>
+                                <br><br>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <h3>American Express®</h3>
+                                        <p>Log in with Amex to verify you’re a Card Member on your Findacargo profile. Your Card will also be added to your account. </p>                         
+                                    </div>
+                                    <div class="col-sm-8" style="text-align:center; padding-top:44px;">                            
+                                        <input type="submit" value="Connect" class="btn btn-primary" style="padding:6px 101px;">
+                                    </div>
+                                </div>
+                              </section>
+                            </div>    
+
+                        </div>
+
+                    </div>  <!-- MOBILE AND EMAIL NOTIFICATIONS ROW END -->
+            </div>
+
+           
+        <div class="footer">
+            <div>
+                <strong>Copyright</strong> Denmark Company &copy; 2016
+            </div>
+        </div>
+
+        </div>
+        </div>
+
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+
+
+</body>
+
+</html>

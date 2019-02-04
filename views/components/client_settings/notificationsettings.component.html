@@ -1,0 +1,31 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2 data-i18n="sidebar.schDel">{{'notification_settings.notifications' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/" data-i18n="body.Dashboard">{{'notification_settings.dashboard' | translate}}</a></li>
+            <li><a ui-sref="" data-i18n="sidebar.clientSettings">{{'notification_settings.settings' | translate}}</a></li>
+            <li class="active"><strong data-i18n="sidebar.notifications">{{'notification_settings.notifications' | translate}}</strong></li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content" style="padding-bottom: 50px">
+        <div class="form-group">
+            <!-- <h4>{{'notification_settings.report' | translate}}</h4> -->
+            <p>Check all of the email notifications that you would like to receive:</p>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" ng-model="model.settings.allow_to_receive_end_of_day_report">
+            <label class="control-label">{{'notification_settings.end_day' | translate}}</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" ng-model="model.settings.allow_to_receive_end_of_week_report">
+            <label class="control-label">{{'notification_settings.end_week' | translate}}</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" ng-model="model.settings.allow_to_receive_issue_report">
+            <label class="control-label">{{'notification_settings.issue' | translate}}</label>
+        </div>
+        <button ng-click="model.updateSettings()" class="btn btn-primary pull-right">{{'notification_settings.submit' | translate}}</button>
+    </div>
+</div>

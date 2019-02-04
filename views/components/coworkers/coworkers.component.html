@@ -1,0 +1,78 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>{{'coworkers.page_title' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/">{{'coworkers.dashboard' | translate}}</a></li>
+            <li><a ui-sref="">{{'coworkers.business_settings' | translate}}</a></li>
+            <li class="active"><strong>{{'coworkers.page_title' | translate}}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+            <button ui-sref="invite" style="margin-top:30px;margin-bottom:10px;" class="btn btn-primary">{{'coworkers.invite' | translate}}</button>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content">
+        <div class="table-responsive" ng-show="model.coworkers.length">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th width="10%">{{'coworkers.name' | translate}}</th>
+                    <th width="10%">{{'coworkers.email' | translate}}</th>
+                    <th width="15%">{{'coworkers.role' | translate}}</th>
+                    <th width="15%">{{'coworkers.joined_on' | translate}}</th>
+                    <th width="10%">{{'coworkers.status' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="coworker in model.coworkers" class="ng-scope">
+                        <td ng-show="!coworker.editMode" class="col-lg-2">{{coworker.name}}</td>
+                        <td ng-show="coworker.editMode" class="col-lg-2"><input ng-model="coworker.name" type="text" placeholder="Name" class="form-control"></td>
+
+                        <td ng-show="!coworker.editMode" class="col-lg-2">{{coworker.email}}</td>
+                        <td ng-show="coworker.editMode" class="col-lg-2"><input ng-model="coworker.email" type="text" placeholder="Email" class="form-control"></td>
+
+                        <td ng-show="!coworker.editMode" class="col-lg-1">
+                            <!--<div ng-show="model.currentUserId == coworker._id">Owner & Admin</div>-->
+                            <div ng-show="coworker.category == 'admin'">Admin</div>
+                            <div ng-show="coworker.category == 'sales'">Agents (Sales, Support..)</div>
+                            <!-- <div ng-show="coworker.category == 'driver'">Driver</div> -->
+                        </td>
+                        <td ng-show="coworker.editMode" class="col-lg-1">
+                            <select ng-model="model.coworker.category" ng-change="model.selectCategory()" class="m-b form-control m-b">
+                                <option ng-repeat="category in model.categories" value="{{category.category}}" ng-model="model.coworker.category">{{category.text}}</option>
+                            </select>
+                        </td>
+
+                        <td ng-show="!coworker.editMode" class="col-lg-1">{{coworker.date | date : mediumDate}}</td>
+                        <td ng-show="coworker.editMode" class="col-lg-1">{{coworker.date | date : mediumDate}}</td>
+
+                        <td class="col-lg-2">
+                            <span ng-if="coworker.status || (model.currentUserId == coworker._id)">{{'coworkers.active' | translate}}</span>
+                            <span ng-if="!coworker.status && model.currentUserId !== coworker._id"><a ng-click="model.resendInvite(coworker)">{{'coworkers.resend' | translate}}</a></span>
+                        </td>
+
+                        <td class="col-lg-2" style="text-align:right">
+                            <div ng-if="!coworker.editMode && model.currentUserId !== coworker._id && model.isAdmin">
+                                <button class="btn btn-info glyphicon glyphicon-pencil" ng-click="model.editView(coworker)"></button>
+                                <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="model.delete(coworker)"></button>
+                            </div>
+                            <div ng-if="coworker.editMode && model.currentUserId !== coworker._id && model.isAdmin">
+                                <button class="btn btn-danger" ng-click="model.edit()">{{'coworkers.done' | translate}} <i class="glyphicon glyphicon-ok"></i></button>
+                                <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="model.closeEditView(coworker)"></button>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="!model.coworkers.length && !model.spinnerChecker.isVisible()" class="white-bg dashboard-header">
+            <div style="width:80%;z-index: 100;margin: auto auto;" ng-show="!alerts.length" class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                <h3 class="font-bold">{{'coworkers.no_coworkers' | translate}}</h3>
+                <div class="error-desc"><a ui-sref="invite"><span>{{'coworkers.invite_your_coworkers' | translate}}&nbsp;</span></a>{{'coworkers.to_allow_them' | translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

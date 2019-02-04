@@ -1,0 +1,327 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-12">
+        <h2>{{'delivery_details.delivery_details' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/">{{'delivery_details.dashboard'  | translate}}</a>
+            </li>
+            <li>
+                <a ui-sref="weeklydeliveries">{{'delivery_details.scheduled_deliveries' | translate}}</a>
+            </li>
+            <li>
+                <a ui-sref="weeklydeliveries">{{'delivery_details.weekly_plan' | translate}}</a>
+            </li>
+            <li>
+                <a ng-click="model.goBack()">{{'delivery_details.daily_deliveries' | translate}}</a>
+            </li>
+            <li class="active">
+                <strong>{{'delivery_details.delivery_details' | translate}}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="row">
+        <!-- MOBILE AND EMAIL NOTIFICATIONS ROW START -->
+        <div class="col-md-12 delivery-detail">
+            <div class="delivery-detail-container clearfix">
+                <div style="border:0" class="ibox-title">
+                    <div class="col-sm-12 right-buttons">
+                        <div ng-show="deletable" class="invite_dropdown right-buttons">
+                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary dropdown-toggle">
+                                {{'delivery_details.actions' | translate}} &nbsp;
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" style="top:56%; position: absolute; left: initial !important;">
+                                <li>
+                                    <a href="/#!/delivery/{{model.details._id}}/edit">{{'delivery_details.edit' | translate}}</a>
+                                </li>
+                                <li>
+                                    <a ng-click="model.deleteDelivery(model.details._id) ">{{'delivery_details.delete' | translate}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button ng-show="model.details.status==3" type="button" class="btn btn-primary right-buttons" style="border-radius: 3px;" ng-click="model.returnDelivery()">
+                            {{'daily_deliveries.return' | translate}}
+                        </button>
+                        <button class="btn btn-primary right-buttons" data-toggle="modal" data-target="#boxModal">{{'delivery_details.label' | translate}}
+                        </button>
+                        
+                        <a class="btn btn-primary right-buttons" href="{{model.trackDomain}}/{{model.details._id}}" target="_blank">{{'delivery_details.see_client_tracking' | translate}}
+                        </a>                        
+                    </div>
+                </div>
+                <div class="col-md-7 ">
+                    <div class="delivery-detail__info ">
+                        <h5>Zone</h5>
+                        <p class="delivery-detail__info__large">
+                            {{model.zone}}
+                        </p>
+                    </div>
+                    <div class="delivery-detail__info ">
+                        <h5>{{'delivery_details.delivery_id' | translate}}</h5>
+                        <p class="delivery-detail__info__large">
+                            <span>
+                                {{ (model.details.deliveryid === '1' || model.details.deliveryid === '' || !model.details.deliveryid) ? '' : model.details.deliveryid}}
+                            </span>
+                            <span ng-if="model.returnedStatus !== 0" style="color:#ff9933; padding-left:50px">
+                                ({{'delivery_details.current_being_returned' | translate}})
+                            </span>
+                                
+                            <span>{{model.delvryId}}</span>
+                            <span ng-if="model.details.full_insurance_value" class="insured-value">{{'delivery_details.this_delivery_insured' | translate}} {{model.details.full_insurance_value}}
+                                <span>DDK</span>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="delivery-detail__info ">
+                        <h5>{{'delivery_details.boxes' | translate}}</h5>
+                        <p class="delivery-detail__info__large ">{{model.details.deliverynumberofpackages}}
+                    </div>
+                    <div class="delivery-detail__info ">
+                        <h5>{{'delivery_details.pickup_address' | translate}}</h5>
+                        <p>{{model.details.pickupaddress + ', ' + model.details.pickupzip + ', '+ model.details.pickupcity}}
+                        </p>
+                    </div>
+                    <div class="delivery-detail__info ">
+                        <h5>{{'delivery_details.delivery_address' | translate}}</h5>
+
+                        <p ng-if="model.details.deliveryaddress2">{{model.details.deliveryaddress + ', ' + model.details.deliveryaddress2 + ', ' + model.details.deliveryzip
+                            + ', ' + model.details.deliverycity}}
+                        </p>
+                        <p ng-if="!model.details.deliveryaddress2">{{model.details.deliveryaddress + ', ' + model.details.deliveryzip + ', ' + model.details.deliverycity}}</p>
+                    </div>
+                    <hr class="delivery-detail__divider ">
+                    <ul class="list-unstyled list-inline ">
+                        <li>
+                            <h5>{{'delivery_details.client_name' | translate}}</h5>
+                            <p>{{model.details.recipientname}}</p>
+                        </li>
+                        <li>
+                            <h5>{{'delivery_details.email' | translate}} </h5>
+                            <p>{{model.details.recipientemail || 'N/A' }}</p>
+                        </li>
+                        <li>
+                            <h5>{{'delivery_details.phone' | translate}}</h5>
+                            <p>{{ model.formatCountryCode(model.details.recipientphone.country_dial_code) }} {{ model.details.recipientphone.phone
+                                || 'N/A' }}</p>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#sendNotificationModal" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-envelope"></span> {{'delivery_details.send_message' | translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-5 ">
+                    <ul class=" list-unstyled clearfix " style="margin-bottom:0px">
+                        <li class="delivery-detail__status delivery-detail__time" style="width:186px">
+                            <h5>{{model.details.status == 3 ? ('delivery_details.delivered_at' | translate) : ('delivery_details.est_time' | translate)}}</h5>
+                            <p ng-if="model.details.delivered_at" class="{{(model.details.status == 3) ? 'green' : 'green'}}">
+                                {{model.getLocalDanTime(model.details.delivered_at)}}</p>
+                            <p ng-if="!model.details.delivered_at&&model.details.estimated_delivery_time" class="{{(model.details.status == 3) ? 'green' : 'green'}}">
+                                {{model.details.estimated_delivery_time}}</p>
+                            <p ng-if="!model.details.delivered_at&&!model.details.estimated_delivery_time" class="{{(model.details.status == 3) ? 'green' : 'green'}}">
+                                {{model.details.deliverywindowstart}} - {{model.details.deliverywindowend}}</p>
+                        </li>
+                        <li class="delivery-detail__status " style="width:132px">
+                            <h5>{{'delivery_details.status' | translate}}</h5>
+                            <p class="green ">{{model.details.status ? model.details.statusText : 'delivery_details.waiting_pickup' | translate }}</p>
+                        </li>
+                    </ul>
+
+                    <div class="delivery-driver__status" style="text-align: center" ng-if='model.rating!==null'>
+                        <div class="custom-heading">
+                            <i ng-repeat="n in [].constructor(model.rating.review)  track by $index" class="fa fa-star-o rating-star" aria-hidden="true"></i>
+                        </div>
+                        <div class="rating-comment">{{model.rating.content}}</div>
+                        <div ng-if="model.rating.contact===true" class="rating-contact">{{ 'delivery_rating.comment' | translate }}</div>
+                    </div>
+                    <!--<div class="delivery-driver-info" ng-if='model.driver'>-->
+                    <div class="delivery-driver__status" style="text-align: center" ng-if='model.driver'>
+                        <div class="custom-heading">
+                            {{'delivery_details.supplied_by' | translate}}
+                        </div>
+                        <img class="img-style imgThumb1" src="/img/user.png">
+                        <div class="carrier-name">{{model.driver.name || 'N/A' }}</div>
+                        <div class="carrier-phone">{{ model.formatCountryCode(model.driver.ccode) }} {{ model.driver.phone || 'N/A' }}</div>
+                    </div>
+                </div>
+                <!--<div class="col-md-12 ">
+                    <hr class="delivery-detail__divider ">
+                </div>-->
+                <div class="col-md-8 delivery-client-info ">
+                    <!--<ul class="list-unstyled list-inline ">
+                        <li>
+                            <h5>{{'delivery_details.client_name' | translate}}</h5>
+                            <p>{{model.details.recipientname}}</p>
+                        </li>
+                        <li>
+                            <h5>{{'delivery_details.email' | translate}} </h5>
+                            <p>{{model.details.recipientemail || 'N/A' }}</p>
+                        </li>
+                        <li>
+                            <h5>{{'delivery_details.phone' | translate}}</h5>
+                            <p>{{ model.details.recipientphone.country_dial_code || '' }} {{ model.details.recipientphone.phone
+                                || 'N/A' }}</p>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#sendNotificationModal" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-envelope"></span> {{'delivery_details.send_message' | translate}}
+                            </a>
+                        </li>
+                    </ul>-->
+                </div>
+
+                <div class="col-md-8 delivery-client-info ">
+                    <ul class="list-unstyled list-inline ">
+                        <li ng-show="model.details.deliverynotes ">
+                            <h5>{{'delivery_details.comments' | translate}}</h5>
+                            <!-- <p>{{model.details.deliverynotes}}</p> -->
+                            <p ng-bind-html='model.details.deliverynotes' />
+                            <!-- <p ng-bind-html-unsafe='model.details.deliverynotes' /> -->
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-12 ">
+                    <hr class="delivery-detail__divider ">
+                </div>
+                <div class="col-md-12">
+                    <div class="delivery-detail__tracking ">
+                        <ul class="list-unstyled delivery-detail__progress ">
+                            <li class="clearfix" ng-repeat="event in model.eventsList | orderBy:'-created_at'  | limitTo:500">
+                                <div class="delivery-progress-time" ng-bind="::event.created_at | date:'medium'"></div>
+                                <div class="delivery-progress-info" ng-if="!event.claim">
+                                    <p class="delivery-progress-info-title">
+                                        <span ng-bind="::model.getEventMessage(event)"></span>
+                                        <button ng-if="event.event=='NOTIFICATION_SENT'" class="btn btn-link notification-detail-btn" data-toggle="modal" data-target="#showNotificationModal" ng-click="model.setNotificationData(event)">( {{'delivery_details.detail' | translate}} )
+                                        </button>
+                                        <button ng-if="event.event_data=='Delivery completed'" class="btn btn-link notification-detail-btn" data-toggle="modal" data-target="#showNotificationModal" ng-click="model.setNotificationData(event)">( {{'delivery_details.detail' | translate}} )
+                                        </button>
+                                    </p>
+                                </div>
+                                <div class="delivery-progress-info" ng-if="event.claim">
+                                    <p class="delivery-progress-info-title">
+                                        <span ng-bind="model.showClaim[event.ClaimType]"></span>
+                                        <button ng-if="model.hasContent(event)" class="btn btn-link claim-detail-btn" data-toggle="modal" data-target="#showClaimModal" ng-click="model.showCliamDetail = event;">( {{'delivery_details.detail' | translate}} )
+                                        </button>
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="routemap" style="height: 480px;"></div>
+            <p id="map_error" class="red">{{mapError}}</p>
+        </div>
+
+        <!-- boxModal -->
+        <div class="modal fade" id="boxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="text-center">{{'delivery_details.how_many_boxes' | translate}}</div>
+                        <div class="text-center action-row">
+                            <i class="fa fa-minus" ng-click="model.changeBoxesCount(false)"></i>
+                            <input type="number" ng-model="model.details.deliverynumberofpackages" min="1" ng-blur="model.setBoxesCount()">
+                            <i class="fa fa-plus" ng-click="model.changeBoxesCount(true)"></i>
+                        </div>
+                        <a ng-click="model.openLabelsSite()" data-dismiss="modal" class="btn btn-primary">{{'delivery_details.print_label' | translate}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="showClaimModal" tabindex="-1" role="dialog" aria-labelledby="showClaimModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h2 class="text-center bold" ng-bind="model.showClaim[model.showCliamDetail.ClaimType]"></h2>
+                        <label class="padding-10">{{'delivery_details.message' | translate}}</label>
+                        <br/>
+                        <span class="padding-10" ng-bind="model.showCliamDetail.message ? model.showCliamDetail.message : 'No message exist'">
+                        </span>
+                        <div class="row padding-10" ng-if="model.showCliamDetail.ClaimType === 3">
+                            <div class="col-md-6 margin-top-10" ng-if="model.showCliamDetail.imgURLS[0]">
+                                <img ng-src="{{model.API_ENDPOINT_URL + '/public/uploads/' + model.showCliamDetail.imgURLS[0]}}" style="width:100%">
+                            </div>
+                            <div class="col-md-6 margin-top-10" ng-if="model.showCliamDetail.imgURLS[1]">
+                                <img ng-src="{{model.API_ENDPOINT_URL + '/public/uploads/' + model.showCliamDetail.imgURLS[1]}}" style="width:100%">
+                            </div> 
+                            <div class="col-md-6 margin-top-10" ng-if="model.showCliamDetail.imgURLS[2]">
+                                <img ng-src="{{model.API_ENDPOINT_URL + '/public/uploads/' + model.showCliamDetail.imgURLS[2]}}" style="width:100%">
+                            </div>
+                            <div class="col-md-6 margin-top-10" ng-if="model.showCliamDetail.imgURLS[3]">
+                                <img ng-src="{{model.API_ENDPOINT_URL + '/public/uploads/' + model.showCliamDetail.imgURLS[3]}}" style="width:100%">
+                            </div>
+                        </div>
+                        <div class="row padding-10 damage-image" ng-if="model.showCliamDetail.ClaimType === 1 && model.showCliamDetail.image">
+                            <div class="half-width">
+                                <img src="{{model.API_ENDPOINT_URL + '/public/uploads/' + model.showCliamDetail.image}}"
+                                    style="width:100%">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="showNotificationModal" tabindex="-1" role="dialog" aria-labelledby="showNotificationModal">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" ng-bind="model.notificationDetail.title"></h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="table-responsive" ng-if="!model.notificationDetail.signature">
+                            <table class="table"  style="table-layout: fixed">
+                                <tr class="padding-10" ng-if="model.notificationDetail.to">
+                                    <th width="100px">To :</th>
+                                    <td>{{model.notificationDetail.to}}</td>
+                                </tr>
+                                <tr class="padding-10" ng-if="model.notificationDetail.subject">
+                                    <th>Subject :</th><td> {{model.notificationDetail.subject}}</td>
+                                </tr>
+                                <tr class="padding-10" ng-if="model.notificationDetail.body">
+                                    <th>Body : </th>
+                                    <td ng-bind-html="model.notificationDetail.body"></td>
+                                </tr>
+                                <tr class="padding-10" ng-if="model.notificationDetail.message">
+                                    <th>Message :</th> 
+                                    <td>{{model.notificationDetail.message}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <img ng-src="{{model.notificationDetail.signature}}" ng-if="model.notificationDetail.signature" style="width:100%"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- boxModal -->
+
+         <!-- sendNotificationModal -->
+         <div class="modal fade" id="sendNotificationModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" 
+                         style="padding-bottom: 50px">
+                        <div ng-if="model.deliveryNotificated.display">
+                            <div ng-class="{'alert-danger': !model.deliveryNotificated.success, 'alert-success': model.deliveryNotificated.success, 'alert': true}" role="alert">{{model.deliveryNotificated.message}}</div>
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            <label for="notifPattern">{{'delivery_details.select_notification_message' | translate}}</label>
+                            <select ng-model="model.notificationMessage" id="notifPattern" class="form-control">
+                                <option ng-repeat="pattern in model.notificationPatterns" value="{{pattern}}">{{pattern}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if="model.notificationMessage === 'Other'">
+                            <label for="notifMessage">{{'delivery_details.enter_your_message' | translate}}</label>
+                            <textarea maxlength="160" rows="3" style="resize: none;" class="form-control" id="notifMessage" ng-attr-placeholder="{{'delivery_details.enter_message' | translate}}" ng-model="model.customNotificationMessage"></textarea>
+                        </div>
+                        <button ng-disabled="!model.approved" ng-click="model.sendNotifications()" class="btn btn-primary pull-right">{{'delivery_details.send_notification' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- sendNotificationModal -->
+    </div>
+</div>

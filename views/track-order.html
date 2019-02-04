@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery details</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/track-your-delivery.css" rel="stylesheet">
+  </head>
+  <body class="bg-white">
+    <section class="container track-order-container">
+      <div class="row">
+        <div class="col-sm-12">
+          <h1 class="track-order-title">Track Order 0123456789 </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 text-center">
+          <div class="dilivary-man-image">
+            <img src="img/a4.jpg" alt="" class="img-responsive">
+          </div>
+          <h5 class="dilivary-man-name">Delivery Man Name </h5>
+          <p class="dilivary-man-phn">+45 987 650 4321</p>
+        </div>
+        <div class="col-md-8  ">
+          <p class="dilivary-man-sub">Destination</p>
+          <p class="dilivary-man-address">28 Vesterbrogade, 3rd block Overgaden oven Vandet, København, Denmark</p>
+          <div class="row">
+            <div class="col-sm-4">
+              <p class="dilivary-man-sub">Delivery Date</p>
+              <p class="dilivary-man-name" >16-08-2017</p>
+            </div>
+            <div class="col-sm-4">
+              <p class="dilivary-man-sub">Delivery Time</p>
+              <p class="dilivary-man-name">4-5 pm</p>
+            </div>
+            <div class="col-sm-4">
+              <p class="dilivary-man-sub">Status</p>
+              <p class="dilivary-man-name color-green">Arriving in 20 mins</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-12 text-center btn-container">
+              <button class="btn primary-button" data-toggle="modal" data-target="#reschedule-delivery-modal">Reschedule</button>
+              <button class="btn secondary-button" data-toggle="modal" data-target="#change-delivery-modal">Change Delivery Address</button>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="track-order-subtitle">Track Shipment Live </h2>
+        </div>
+      </div>
+    </section>
+    <section class="map-section">
+      <div id="map-canvas" class="map-canvas-holder">
+        
+      </div>
+    </section>
+
+    <section class="container track-order-container shipment-details">
+      <div class="row">
+        <div class="col-sm-12">
+           <h2 class="track-order-subtitle">Shipment Details </h2>
+        </div>
+        <div class="col-sm-4">
+            <p class="dilivary-man-sub">Client Name</p>
+            <p class="dilivary-man-name" >William Greek</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="dilivary-man-sub">Ordered On </p>
+            <p class="dilivary-man-name" >16-08-2017</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="dilivary-man-sub">No. of Items </p>
+            <p class="dilivary-man-name" >2 Items</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="dilivary-man-sub">Email</p>
+            <p class="dilivary-man-name" >williamgreek@gmail.com</p>
+        </div>
+        <div class="col-sm-4">
+            <p class="dilivary-man-sub">Phone </p>
+            <p class="dilivary-man-name" >+45 346 766 9022</p>
+        </div>
+      </div>
+    </section>
+    <section class="container track-order-container shipment-status">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="track-order-subtitle">Shipment Status</h2>
+        </div>
+        <div class="col-sm-12">
+          <ul class="progess-bar-status clearfix">
+            <li>
+              Ordered <div class="after-check"><i class="fa fa-check" aria-hidden="true"></i></div>
+            </li>
+            <li>Packed <div class="after-check"><i class="fa fa-check" aria-hidden="true"></i></div></li>
+            <li>Picked up <div class="after-check"><i class="fa fa-check" aria-hidden="true"></i></div></li>
+            <li class="in-progess">In Tranist </li>
+            <li>Arriving <div class="after-check is-not-done"><i class="fa fa-check" aria-hidden="true"></i></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="container track-order-container shipment-status">
+      <div class="row">
+        <div class="col-sm-12">
+          <h2 class="track-order-subtitle">Tracking Details</h2>
+        </div>
+        <div class="col-sm-12">
+          <ul class="progess-vertical-status ">
+            <li>
+              <p class="dilivary-man-sub">Thursday, 10-08-2017, 2D30 pm</p> 
+              <p class="dilivary-man-name">Order Received </p>
+              <div class="after-check-vertical"></div>
+            </li>
+            <li><p class="dilivary-man-sub">Friday, 11-08-2017, 12D30 pm</p> 
+              <p class="dilivary-man-name">Order Ready for Delivery </p> <div class="after-check-vertical"></div></li>
+            <li><p class="dilivary-man-sub">Saturday, 12-08-2017, 9D30 am</p> 
+              <p class="dilivary-man-name">Delivery Picked up  </p> <div class="after-check-vertical"></div></li>
+            <li class=""><p class="dilivary-man-sub">Today, 16-08-2017, ….</p> 
+              <p class="dilivary-man-name">Scheduled for Delivery </p> <div class="after-check-vertical  is-not-done"></div></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+
+    <div id="change-delivery-modal" class="modal fade custom-modal change-address-modal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center">Change Delivery Address</h4>
+            <a href="#" data-toggle="modal" data-target="#add-delivery-modal">Add New Delivery Address</a>
+          </div>
+          <div class="modal-body  ">
+            <div class="radio chage-address-radio clearfix">
+              <label class="col-sm-8">
+                <input type="radio" name="optradio">
+                28 Vesterbrogade, 3rd block Overgaden oven Vandet, København, Denmark
+
+              </label>
+              <div class="col-sm-4 text-center">
+                <a href="#" class="address-modal-edit" data-toggle="modal" data-target="#edit-delivery-modal">Edit</a>
+              </div>
+            </div>
+            <div class="radio chage-address-radio clearfix">
+              <label  class="col-sm-8">
+                <input type="radio" name="optradio">
+                28 Vesterbrogade, 3rd block Overgaden
+                København Ø, Denmar
+
+              </label>
+              <div class="col-sm-4 text-center">
+                <a href="#" class="address-modal-edit" data-toggle="modal" data-target="#edit-delivery-modal">Edit</a>
+              </div>
+            </div>
+
+            <div class="text-center btn-container">
+              <button class="btn  red-btn" data-dismiss="modal">Change</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+     <div id="edit-delivery-modal" class="modal fade custom-modal change-address-modal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center">Edit Delivery Address</h4>
+          </div>
+          <div class="modal-body  ">
+            <div class="text-center">
+              <textarea name="" id="" class="edit-textarea">28 Vesterbrogade, 3rd block Overgaden oven Vandet, København, Denmar</textarea>
+            </div>
+            <div class="text-center">
+              <label class="radio-inline">Is this address your </label>
+              <label class="radio-inline"><input type="radio" name="optradio">Home</label>
+              <label class="radio-inline"><input type="radio" name="optradio">Office</label>
+              <label class="radio-inline"><input type="radio" name="optradio">Other</label>
+            </div>
+            <div class="text-center btn-container">
+              <button class="btn  red-buttton ">Save</button>
+              <button class="btn red-btn" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="add-delivery-modal" class="modal fade custom-modal change-address-modal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center">Add New Delivery Address</h4>
+          </div>
+          <div class="modal-body  ">
+            <div class="text-center">
+              <textarea name="" id="" class="edit-textarea">28 Vesterbrogade, 3rd block Overgaden oven Vandet, København, Denmar</textarea>
+            </div>
+            <div class="text-center">
+              <label class="radio-inline">Is this address your </label>
+              <label class="radio-inline"><input type="radio" name="optradio">Home</label>
+              <label class="radio-inline"><input type="radio" name="optradio">Office</label>
+              <label class="radio-inline"><input type="radio" name="optradio">Other</label>
+            </div>
+            <div class="text-center btn-container">
+              <button class="btn  red-buttton ">Save</button>
+              <button class="btn red-btn" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div id="reschedule-delivery-modal" class="modal fade custom-modal change-address-modal" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body reschedule-delivery-body text-center ">
+                <div class="reschedule-circle">
+                  <div class="reschedule-circle-inner"></div>
+                </div>
+                <h3 class="reschedule-delivery-title">Successfully Rescheduled Your order 0123456789</h3>
+                <p><strong>You can pickup your package at</strong></p>
+                <p>Nearest pickup spot is 1234, Street address, City</p>
+                <p class="text-low">1.2 kms away <a href="#">Locate on map</a></p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <script src="js/jquery-2.1.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+      <script>
+          function initMap() {
+              var pointA = {lat:55.6617,lng:12.5168},
+              pointB = {lat:55.6991,lng:12.5542},
+              myOptions = {
+                zoom: 10,
+                center: pointA
+              },
+              map = new google.maps.Map(document.getElementById('map-canvas'), myOptions),
+              directionsService = new google.maps.DirectionsService,
+              directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map,
+                suppressMarkers : true
+              }),
+              markerA = new google.maps.Marker({
+                position: pointA,
+                map: map,
+                icon:"img/map-black.png"
+              }),
+              markerB = new google.maps.Marker({
+                position: pointB,
+                map: map,
+                icon:"img/map-car.png",
+                content:"hello"
+
+              });
+             
+
+              // get route from A to B
+              calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+
+               var popup=new google.maps.InfoWindow({
+                  content: '<p id="hook">20 mins away</p>'
+              });
+                  popup.open(map, markerA);
+                  $("#hook").css("background-color", "yellow ");
+            }
+
+
+
+            function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+              directionsService.route({
+                origin: pointA,
+                destination: pointB,
+                avoidTolls: true,
+                avoidHighways: false,
+                travelMode: google.maps.TravelMode.DRIVING
+              }, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                  directionsDisplay.setDirections(response);
+                } else {
+                  window.alert('Directions request failed due to ' + status);
+                }
+              });
+            }
+
+            initMap();
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDWE-8V1JOvgoxrhUmj3HyykN_NgIoom-Y&callback=initMap">
+        </script>
+  </body>
+</html>

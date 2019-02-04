@@ -1,0 +1,153 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <script src="js/plugins/fullcalendar/moment.min.js"/></script>
+    <div class="col-lg-10">
+        <h2>{{'weekly_deliveries.scheduled_deliveries' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/">{{'weekly_returns.dashboard' | translate}}</a></li>
+            <li><a ui-sref="" >{{'daily_returns.scheduled_returns' | translate}}</a></li>      
+            <!-- <li><a ui-sref="weeklyreturns">{{'weekly_deliveries.scheduled_deliveries' | translate}}</a></li> -->
+            <li class="active"><strong>{{'weekly_returns.returns_overview' | translate}}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<inactivewarning></inactivewarning>
+<div class="row">
+    <div class="col-lg-12">
+        <div style="margin-top:15px;" class="ibox">
+            <div style="border:0" class="ibox-title">
+                <div class="col-sm-4">
+                    
+                </div>
+                <div class="col-sm-8">
+                    <div class="pull-right invite_dropdown">
+                        <a ui-sref="returnrequest">
+                            <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                    class="btn btn-primary"> {{'weekly_returns.add_return' | translate}}
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="model.weekly_returns.length" class="white-bg dashboard-header">
+                <div id="lineChartContent">
+                    <canvas id="canvas" style="height: 176px; width: 757px; margin-top: 20px;"></canvas>
+                </div>
+            </div>
+            
+            <div ng-show="!model.weekly_returns.length && !model.spinnerChecker.isVisible()" ng-cloak="ng-cloak"
+                 class="white-bg dashboard-header">
+                <div style="width:80%;z-index: 100;margin: auto auto;" ng-show="!alerts.length"
+                     class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                    <h3 class="font-bold">{{'weekly_returns.no_returns' | translate}}</h3>
+                    <div class="error-desc"><span>{{'weekly_returns.start_planning' | translate}} &nbsp;</span><a
+                            ui-sref="returnrequest">{{'weekly_returns.new_returns' | translate}}</a></div>
+                </div>
+            </div>
+            <div ng-show="model.weekly_returns.length" class="white-bg dashboard-header">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th><!--'common.week' | translate--></th>
+                            <th></th>
+                            <th>{{'common.monday' | translate}}</th>
+                            <th>{{'common.tuesday' | translate}}</th>
+                            <th>{{'common.wednesday' | translate}}</th>
+                            <th>{{'common.thursday' | translate}}</th>
+                            <th>{{'common.friday' | translate}}</th>
+                            <th>{{'common.saturday' | translate}}</th>
+                            <th>{{'common.sunday' | translate}}</th>
+                            <!--th Route-->
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="w in model.weekly_returns |  orderBy:'-_id'">
+                            <td><span><strong>{{w._id.weekNumber}}</strong></span></td>
+                            <td>{{model.getDateRangeOfWeek(w._id.weekNumber, w._id.year)}}</td>
+                            <td ng-class="{'bg-light-grey': (model.isTodayCell( w._id.year, w._id.weekNumber, 'month'))}">                                
+                                <div ng-if="w.mondayInfo.length>0">      
+                                    <div ng-repeat="windowInfo in w.mondayInfo">
+                                        <a  ui-sref="dailyreturns({year : {{w._id.year}}, weeknumber : {{w._id.weekNumber}}, day : 'monday' })">
+                                            <span class="text-sm" style="color:lightgray;">{{windowInfo.deliveryWindowStart}}-{{windowInfo.deliveryWindowEnd}}&nbsp;</span>
+                                            <span> {{windowInfo.count}} {{windowInfo.count == 1 ? ('weekly_returns.return' | translate)
+                                                : ('weekly_returns.returns' | translate)}}</span>                                        
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-class="{'bg-light-grey': (model.isTodayCell( w._id.year, w._id.weekNumber, 'tuesday'))}">                            
+                                <div ng-if="w.tuesdayInfo.length>0">      
+                                    <div ng-repeat="windowInfo in w.tuesdayInfo">
+                                        <a  ui-sref="dailyreturns({year : {{w._id.year}}, weeknumber : {{w._id.weekNumber}}, day : 'tuesday' })">
+                                            <span class="text-sm" style="color:lightgray;">{{windowInfo.deliveryWindowStart}}-{{windowInfo.deliveryWindowEnd}}&nbsp;</span>
+                                            <span> {{windowInfo.count}} {{windowInfo.count == 1 ? ('weekly_returns.return' | translate)
+                                                : ('weekly_returns.returns' | translate)}}</span>                                        
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-class="{'bg-light-grey': (model.isTodayCell( w._id.year, w._id.weekNumber, 'wednesday'))}">                                    
+                                <div ng-if="w.wednesdayInfo.length>0">      
+                                    <div ng-repeat="windowInfo in w.wednesdayInfo">
+                                        <a  ui-sref="dailyreturns({year : {{w._id.year}}, weeknumber : {{w._id.weekNumber}}, day : 'wednesday' })">
+                                            <span class="text-sm" style="color:lightgray;">{{windowInfo.deliveryWindowStart}}-{{windowInfo.deliveryWindowEnd}}&nbsp;</span>
+                                            <span> {{windowInfo.count}} {{windowInfo.count == 1 ? ('weekly_returns.return' | translate)
+                                                : ('weekly_returns.returns' | translate)}}</span>                                        
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-class="{'bg-light-grey': (model.isTodayCell( w._id.year, w._id.weekNumber, 'thursday'))}">                                    
+                                <div ng-if="w.thursdayInfo.length>0">      
+                                    <div ng-repeat="windowInfo in w.thursdayInfo">
+                                        <a  ui-sref="dailyreturns({year : {{w._id.year}}, weeknumber : {{w._id.weekNumber}}, day : 'thursday' })">
+                                            <span class="text-sm" style="color:lightgray;">{{windowInfo.deliveryWindowStart}}-{{windowInfo.deliveryWindowEnd}}&nbsp;</span>
+                                            <span> {{windowInfo.count}} {{windowInfo.count == 1 ? ('weekly_returns.return' | translate)
+                                                : ('weekly_returns.returns' | translate)}}</span>                                        
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-class="{'bg-light-grey': (model.isTodayCell( w._id.year, w._id.weekNumber, 'friday'))}">                                    
+                                <div ng-if="w.fridayInfo.length>0">      
+                                    <div ng-repeat="windowInfo in w.fridayInfo">
+                                        <a  ui-sref="dailyreturns({year : {{w._id.year}}, weeknumber : {{w._id.weekNumber}}, day : 'friday' })">
+                                            <span class="text-sm" style="color:lightgray;">{{windowInfo.deliveryWindowStart}}-{{windowInfo.deliveryWindowEnd}}&nbsp;</span>
+                                            <span> {{windowInfo.count}} {{windowInfo.count == 1 ? ('weekly_returns.return' | translate)
+                                                : ('weekly_returns.returns' | translate)}}</span>                                        
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-class="{'bg-light-grey': (model.isTodayCell( w._id.year, w._id.weekNumber, 'saturday'))}">                                    
+                                <div ng-if="w.saturdayInfo.length>0">      
+                                    <div ng-repeat="windowInfo in w.saturdayInfo">
+                                        <a  ui-sref="dailyreturns({year : {{w._id.year}}, weeknumber : {{w._id.weekNumber}}, day : 'saturday' })">
+                                            <span class="text-sm" style="color:lightgray;">{{windowInfo.deliveryWindowStart}}-{{windowInfo.deliveryWindowEnd}}&nbsp;</span>
+                                            <span> {{windowInfo.count}} {{windowInfo.count == 1 ? ('weekly_returns.return' | translate)
+                                                : ('weekly_returns.returns' | translate)}}</span>                                        
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td ng-class="{'bg-light-grey': (model.isTodayCell( w._id.year, w._id.weekNumber, 'sunday'))}">                                    
+                                <div ng-if="w.sundayInfo.length>0">      
+                                    <div ng-repeat="windowInfo in w.sundayInfo">
+                                        <a  ui-sref="dailyreturns({year : {{w._id.year}}, weeknumber : {{w._id.weekNumber}}, day : 'sunday' })">
+                                            <span class="text-sm" style="color:lightgray;">{{windowInfo.deliveryWindowStart}}-{{windowInfo.deliveryWindowEnd}}&nbsp;</span>
+                                            <span> {{windowInfo.count}} {{windowInfo.count == 1 ? ('weekly_returns.return' | translate)
+                                                : ('weekly_returns.returns' | translate)}}</span>                                        
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

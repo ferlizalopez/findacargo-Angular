@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard | Sign-Up</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard | Log-In</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <!-- Gritter -->
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body class="sign-up-body language">
+    <div id="wrapper">
+        <div style="background-color:#28282e" class="row wrapper white-bg page-heading">
+            <div class="col-sm-2"></div>
+            <div style="margin-top:5px;" class="col-lg-8">
+                <h4></h4>
+                <select id="lng-select" class="select btn-success btn-outline pull-right">
+                    <option value="en">English</option>
+                    <option value="da" selected>Danish</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <h1 class="logo-name">
+        <a href="http://Nemlevering.com">
+            <img src="img/main_logo.png">
+        </a>
+    </h1>
+    <div class="container container-sign-up middle-box text-center loginscreen animated fadeInDown">
+        <!--<div class="row social-btns">
+        <div class="col-lg-8 fb-ggl">
+            <button class="btn btn-facebook"><i class="fa fa-facebook"></i> | <span data-i18n="connect-with-facebook">Connect with Facebook</span>
+            </button>
+            <br>
+            <br>
+            <button class="btn btn-google"><i class="fa fa-google-plus"></i> | <span data-i18n="connect-with-google">Connect with Google &nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>-->
+        <div class="row txt-flds">
+            <form action="/register" id="signup" method="post">
+                <div class="col-lg-8 input-txt">
+                    <input type="email" placeholder="Email" name="email" aria-describedby="emailerror" value="{{reqObj.email}}"> 
+                    {{#if emailRequiredMessage}}
+                        <span id="emailerror" style="color: red" class="help-block" data-i18n="email_required"></span>
+                    {{/if}} 
+
+                    {{#if emailErrorMessageInvalid}}
+                        <span id="emailerror" style="color: red" class="help-block" data-i18n="invalid_email"></span>
+                    {{/if}}
+                    <input type="password" placeholder="Password" name="password" data-i18n="[placeholder]password" value="{{reqObj.password}}">
+                    <input type="password" placeholder="Confirm Password" name="confirmpassword" aria-describedby="passerror" data-i18n="[placeholder]confirm_password"
+                        value="{{reqObj.confirmpassword}}"> 
+                    {{#if passwordErrorMessageRequired}}
+                        <span id="passerror" style="color: red" class="help-block" data-i18n="password_required"></span>
+                    {{/if}} 
+                    {{#if confirmPasswordErrorMessageRequired}}
+                        <span id="passerror" style="color: red" class="help-block" data-i18n="confirm_password_required"></span>
+                    {{/if}}
+                    {{#if passwordErrorMessageNotMatch}}
+                        <span id="passerror" style="color: red" class="help-block" data-i18n="password_not_match"></span>
+                    {{/if}}
+                    {{#if errorResponseForDuplicate}}
+                        <span id="passerror" style="color: red" class="help-block" data-i18n="duplicate_email"></span>
+                    {{/if}}
+                    {{#if errorResponse}}
+                        <span id="passerror" style="color: red" class="help-block" data-i18n="invalid_request"></span>
+                    {{/if}}
+                    <br>
+                    <br>
+                    <!-- <a href="#">ADD A PROMO CODE</a> -->
+                    <br>
+                    <!-- <h2>What are you?</h2> -->
+                    <p>
+                        <!-- <input class="checks" type="radio" name="buyer" value="buyer"> Buyer
+                    <br>
+                    <input class="checks" type="radio" name="buyer" value="broker"> Broker/Agent
+                    <br>
+                    <input class="checks" type="radio" name="buyer" value="carrier"> Carrier (Seller)
+                    <br> -->
+                        <input class="checks" type="checkbox">
+                        <span class="checkbox-clr">
+                            <span data-i18n="i-agree">I agree with the</span>
+                            <strong>
+                                <a href="https://nemlevering.dk/legal" data-i18n="terms-agree"> Terms & conditions </a>
+                            </strong>
+                            <span>
+                    </p>
+                </div>
+                <div style="text-align: center; margin-top: 30px; width: 50%; margin-left: 25%;">
+                    <button type="submit" style="border-radius:40px; -moz-border-radius: 40px; -webkit-border-radius: 40px;background-color:#d43038;"
+                        data-i18n="register" class="btn btn-danger block full-width m-b">Register
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="js/jquery-2.1.1.js"></script>
+    
+    <script src="js/plugins/i18n/jquery.i18n.js"></script>
+    <script src="js/plugins/i18n/jquery.i18n.messagestore.js"></script>
+    <script src="js/plugins/i18n/jquery.i18n.fallbacks.js"></script>
+    <script src="js/plugins/i18n/jquery.i18n.parser.js"></script>
+    <script src="js/plugins/i18n/jquery.i18n.emitter.js"></script>
+    <script src="js/plugins/i18n/jquery.i18n.language.js"></script>    
+    <script src="js/plugins/i18n/init.js"></script>
+</body>
+
+</html>

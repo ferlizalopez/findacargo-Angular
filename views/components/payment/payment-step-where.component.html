@@ -1,0 +1,31 @@
+<div class="text-center ">
+    <h1>{{'payment.where_to' | translate}}</h1>
+    <p class="text-center">{{'payment.you_can_select' | translate}}</p>
+
+    <div class="shipment-blocks">
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.whereVariants[0])"
+             ng-class="{selected: ctrl.whereVariants[0].active}">{{ctrl.whereVariants[0].value}}
+        </div>
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.whereVariants[1])"
+             ng-class="{selected: ctrl.whereVariants[1].active}">{{ctrl.whereVariants[1].value}}
+        </div>
+    </div>
+    <div class="shipment-blocks">
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.whereVariants[2])"
+             ng-class="{selected: ctrl.whereVariants[2].active}">{{ctrl.whereVariants[2].value}}
+        </div>
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.whereVariants[3])"
+             ng-class="{selected: ctrl.whereVariants[3].active}">{{ctrl.whereVariants[3].value}}
+        </div>
+    </div>
+</div>
+
+<div class="buttons-payment-block">
+    <div class="text-center">
+        <button class="btn btn-primary"
+                ng-click="ctrl.changeStep({val: false})">{{'payment.previous_step' | translate}}
+        </button>
+        <button class="btn btn-primary" ng-click="ctrl.changeStep({val: true})">{{'payment.next_step' | translate}}
+        </button>
+    </div>
+</div>

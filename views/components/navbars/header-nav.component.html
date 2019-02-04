@@ -1,0 +1,50 @@
+<nav class="navbar navbar-static-top" role="navigation">
+
+    <div class="navbar-header" style="float: left; display: flex;">
+        <!-- <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a> -->
+        <div style="display: flex; margin: 0 10px;">
+            <select ng-model="model.lang" ng-change="model.changeLang()" class="form-control">
+                <option value="en">English</option>
+                <option value="da" selected="">Dansk</option>
+            </select>
+        </div>
+        <!--<div ng-if="model.isShown && (!model.approved || model.approved === false)" style='display: flex; padding: 0; border: 0; margin: 0 10px; align-items: center;'
+             class="alert alert-success" role="alert">
+            <div style="padding: 0 15px;">
+                 <span>{{'navbar.can_add' | translate}} <strong>{{'navbar.activate' | translate}}</strong></span>
+             </div>
+             <div style="width: 80px;">
+                 <a href="/#!/payment" class="btn btn-primary btn-block" ng-click="model.redirectToPayment()">{{'navbar.pay' | translate}}</a>
+             </div>
+         </div>-->
+     </div>
+
+     <ul class="nav navbar-top-links navbar-right">
+         <li>
+             <span class="m-r-sm text-muted welcome-message"><a ui-sref="invite"
+                                                                style="color:#888888; font-weight:bold;">{{'navbar.invite_people' | translate}}</a></span>
+         </li>
+         <li class="dropdown" style="display:inline-flex;">
+             <a data-toggle="dropdown" class="dropdown-toggle" href="javascript:void(0)">
+                 <span class="clear">
+                     <span class="block m-t-xs" style="color:#888888; font-weight:bold;"> {{model.userEmail}} &nbsp;
+                         <!-- <img alt="image" class="img-circle" src="img/profile_small.jpg" /> -->
+                    </span>  
+                 </span>
+            </a>
+            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                <!-- <li><a href="#">Notifications</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Profile </a></li>
+                <li class="divider"></li>
+                <li><a href="#">Trust & Verification</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Payments</a></li> 
+                <li class="divider"></li>-->
+                <li><a href='/#!/usernotificationsettings'>{{'navbar.notifications' | translate}}</a></li>
+                <li><a href='/#!/changepassword'>{{'navbar.changepassword' | translate}}</a></li>
+                <li><a href='/logout'>{{'navbar.logout' | translate}}</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>

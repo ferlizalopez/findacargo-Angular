@@ -1,0 +1,12 @@
+<div class="text-center ">
+    <h1>{{'payment.what_ship' | translate}}</h1>
+
+    <div class="shipment-blocks">
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.types[0])" ng-class="{selected: ctrl.selectedType === ctrl.types[0]}">{{'payment.packages' | translate}}</div>
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.types[1])" ng-class="{selected: ctrl.selectedType === ctrl.types[1]}">{{'payment.catering' | translate}}</div>
+    </div>
+    <div class="shipment-blocks">
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.types[2])" ng-class="{selected: ctrl.selectedType === ctrl.types[2]}">{{'payment.mealboxes' | translate}}</div>
+        <div class="shipment-block" ng-click="ctrl.select(ctrl.types[3])" ng-class="{selected: ctrl.selectedType === ctrl.types[3]}">{{'payment.other' | translate}}</div>
+    </div>
+</div>

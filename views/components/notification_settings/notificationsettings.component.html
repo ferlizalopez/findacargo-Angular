@@ -1,0 +1,98 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-7">
+        <h2>{{'clients_notifications.clients_notifications' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/">{{'clients_notifications.dashboard' | translate}}</a></li>
+            <li><a ui-sref="">{{'clients_notifications.business_settings' | translate}}</a></li>
+            <li class="active"><strong>{{'clients_notifications.clients_notifications' | translate}}</strong></li>
+        </ol>
+    </div>
+    <!-- <div class="col-md-5">
+        <div class="button-container-header text-right">
+            <button class="btn btn-primary" ng-click="model.addNew()">{{'clients_notifications.add_client' |
+                translate}}</button>
+        </div>
+    </div> -->
+</div>
+<div class="wrapper wrapper-content animated fadeIn">
+    <div class="ibox-content">
+        <div class="table-responsive" style="overflow:hidden" ng-if="model.clients.length > 0">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>{{'clients_notifications.email' | translate}}</th>
+                        <th>{{'clients_notifications.phone_number' | translate}}</th>
+                        <th>{{'clients_notifications.notification_by_email' | translate}}</th>
+                        <th>{{'clients_notifications.notification_by_SMS' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="client in model.clients">
+                        <td style="padding: 20px 10px;">
+                            <div ng-hide="client.editorEnabled"> {{ client.email }} </div>
+                            <div ng-show="client.editorEnabled">
+                                <input ng-model="client.email" type="text" placeholder="Name" class="form-control">
+                                <!-- <input ng-model="client.email" ng-blur="model.save(client)" ng-keyup="$event.keyCode == 13 ? model.save(client) : null"> -->
+                            </div>
+                        </td>
+                        <td style="padding: 20px 10px;">
+                            <div ng-hide="client.editorEnabled"> {{ client.phone_number }} </div>
+                            <div ng-show="client.editorEnabled">
+                                <input ng-model="client.phone_number" type="text" placeholder="Phone Number" class="form-control">
+                                <!-- <input ng-model="client.phone_number" ng-blur="model.save(client)" ng-keyup="$event.keyCode == 13 ? model.save(client) : null"> -->
+                            </div>
+                        </td>
+                        <td>
+                            <i class="fa fa-toggle-on active" style="font-size: 40px;color: #5cb85c;" ng-if="client.email_enabled"
+                                ng-click="model.toggleEmailSelection(client);"></i>
+                            <i class="fa fa-toggle-on fa-rotate-180 inactive" style="font-size: 40px;color: #d9534f;"
+                                ng-if="! client.email_enabled" ng-click="model.toggleEmailSelection(client);"></i>
+                        </td>
+                        <td>
+                            <i class="fa fa-toggle-on active" style="font-size: 40px;color: #5cb85c;" ng-if="client.sms_enabled"
+                                ng-click="model.toggleSmsSelection(client);"></i>
+                            <i class="fa fa-toggle-on fa-rotate-180 inactive" style="font-size:40px;color: #d9534f;"
+                                ng-if="! client.sms_enabled" ng-click="model.toggleSmsSelection(client);"></i>
+                        </td>
+                        <!-- <td style="text-align: right">
+                            <button class="btn btn-primary" ng-click="model.edit(client)"><i class="fa fa-clipboard"></i> {{'clients_notifications.edit' | translate}}</button>
+                         &nbsp; &nbsp;
+                            <button class="btn btn-primary" ng-click="model.remove($index, client)">{{'clients_notifications.delete' | translate}}</button>
+                    </td> -->
+                        <td style="text-align:right">
+                            <div ng-if="!client.editorEnabled">
+                                <button class="btn btn-info glyphicon glyphicon-pencil" ng-click="model.edit(client)"></button>
+                                <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="model.remove($index, client)"></button>
+                            </div>
+                            <div ng-if="client.editorEnabled">
+                                <button class="btn btn-danger" ng-click="model.submit(client)">{{'coworkers.done' |
+                                    translate}} <i class="glyphicon glyphicon-ok"></i></button>
+                                <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="model.remove($index, client)"></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="col-md-5" style="padding-left:0px">
+                <div class="button-container-header text-left" style="width:50%; padding-top:5px; padding-left:0px">
+                    <!-- <button class="btn btn-primary"  ng-click="model.addNew()">{{'clients_notifications.add_client' | translate}}</button> -->
+                    <button class="btn btn-info glyphicon glyphicon-plus btn-block" ng-click="model.addNew()"></button>
+                </div>
+            </div>
+        </div>
+
+        <div ng-hide="model.clients.length > 0 && !model.spinnerChecker.isVisible()" class="white-bg dashboard-header">
+            <div style="width:80%;z-index: 100;margin: auto auto;" class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                <h3 class="font-bold">{{'clients_notifications.no_clients' | translate}}</h3>
+                <div class="error-desc"><span>{{'clients_notifications.you_can_add_multiple_clients' | translate}}</div>
+                <div class="col-md-12" style="padding-left:0px">
+                    <div class="button-container-header text-center" style="width:100%">
+                        <!-- <button class="btn btn-primary"  ng-click="model.addNew()">{{'clients_notifications.add_client' | translate}}</button> -->
+                        <button class="btn btn-info glyphicon glyphicon-plus btn-block" ng-click="model.addNew()"></button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

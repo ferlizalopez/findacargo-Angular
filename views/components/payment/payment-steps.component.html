@@ -1,0 +1,49 @@
+<div class="payment-container">
+    <div class="text-center step-title">{{'payment.step' | translate}} {{ctrl.currentStep}}</div>
+    <!-- <div class="skip-payment">
+        <a class="btn" href="/#!/home">{{'payment.skip_payment' | translate}}</a>
+    </div> -->
+    <div class="progress payment-progress-bar">
+        <div style="width: {{ctrl.progress}}%;" class="progress-bar"></div>
+    </div>
+
+    <paymentsteptype select-type="ctrl.selectType(type)" selected-type="ctrl.selectedType" types="ctrl.types" change-step="ctrl.changeStep(val)"
+                     ng-show="ctrl.step === ctrl.steps.types"></paymentsteptype>
+    <paymentstepcompanydetails company-details="ctrl.companyDetails" change-step="ctrl.changeStep(val)"
+                               ng-show="ctrl.step === ctrl.steps.companydetails"></paymentstepcompanydetails>
+    <paymentstepwhen selected-when="ctrl.selectedWhen" when-days="ctrl.whenDays" change-step="ctrl.changeStep(val)"
+                     ng-show="ctrl.step === ctrl.steps.when"></paymentstepwhen>
+    <paymentstepwhere where-variants="ctrl.whereVariants" change-step="ctrl.changeStep(val)" ng-show="ctrl.step === ctrl.steps.where"></paymentstepwhere>
+    <paymentstepdetails details="ctrl.details" finish-step="ctrl.finishStep" change-step="ctrl.changeStep(val)" finish="ctrl.finish()" ng-show="ctrl.step === ctrl.steps.details"></paymentstepdetails>
+    <paymentsteppay validate-flow="ctrl.validateFlow()" save-settings="ctrl.saveSettings()"
+                    ng-show="ctrl.step === ctrl.steps.pay"></paymentsteppay>
+
+    <div class="need-help">
+        <b>{{'payment.need_help' | translate}}</b>
+        <br> 787 54 785
+        <br> support@goidag.com
+    </div>
+</div>
+
+
+<div class="modal fade" id="validationStepsModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body"
+                 style="padding-bottom: 50px">
+                <div class="text-center">
+                    <h2>{{'payment.information' | translate}}</h2>
+                </div>
+                <p style="font-weight: bold">{{'payment.to_complete_setup' | translate}} </p>
+                <div ng-if="ctrl.validationMessages.length > 0">
+                    <p ng-repeat="(key, message) in ctrl.validationMessages">{{key + 1}}. {{message}}</p>
+                </div>
+                <div class="text-center">
+                    <button data-dismiss="modal" ng-click="ctrl.validationMessages = []" style="min-width: 100px;"
+                            class="btn btn-primary">OK
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

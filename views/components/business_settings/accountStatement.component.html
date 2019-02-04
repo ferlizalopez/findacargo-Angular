@@ -1,0 +1,70 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>{{'account_statement.account_statement' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a ui-sref="index">{{'account_statement.dashboard' | translate}}</a></li>
+            <li><a ui-sref="">{{'account_statement.business_settings' | translate}}</a></li>
+            <li class="active"><strong>{{'account_statement.account_statement' | translate}}</strong></li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="col-md-6">
+                        <div class="payments-title">
+                            <h3>{{'account_statement.payments' | translate}}</h3>
+                        </div>
+                    </div>
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <th>{{'account_statement.date' | translate}}</th>
+                                <th>{{'account_statement.description' | translate}}</th>
+                                <th>{{'account_statement.value' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in model.payments" class="ng-scope">
+                                <td class="col-md-1 ng-binding">{{item.date | date:'MM/dd/yyyy'}}</td>
+                                <td class="col-md-1 ng-binding">{{item.description}}</td>
+                                <td class="col-md-1 ng-binding">{{item.value}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <div class="col-md-6">
+                        <div class="expenses-title">
+                            <h3>{{'account_statement.expenses' | translate}}</h3>
+                        </div>
+                    </div>
+                    <table class="table table-stripped">
+                        <thead>
+                            <tr>
+                                <th>{{'account_statement.date' | translate}}</th>
+                                <th>{{'account_statement.description' | translate}}</th>
+                                <th>{{'account_statement.value' | translate}}</th>
+                                <th>{{'account_statement.paid' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in model.expenses" class="ng-scope">
+                                <td class="col-md-1 ng-binding">{{item.date | date:'MM/dd/yyyy'}}</td>
+                                <td class="col-md-1 ng-binding">{{item.description}}</td>
+                                <td class="col-md-1 ng-binding">{{item.value}}</td>
+                                <td class="col-md-1 ng-binding">{{item.paid ? 'Yes' : 'No'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

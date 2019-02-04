@@ -1,0 +1,56 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-md-7">
+        <h2>{{'new_notifications.new_notifications' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/">{{'new_notifications.dashboard' | translate}}</a></li>
+            <li><a ui-sref="">{{'new_notifications.business_settings' | translate}}</a></li>
+            <li class="active"><strong>{{'new_notifications.new_notifications' | translate}}</strong></li>
+        </ol>
+    </div>
+</div>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div ng-show="!assignDiv" class="">
+        <div class="row mgb-20">
+            <div class="col-sm-12">
+                <h2 data-i18n="">SMS/Email</h2>
+            </div>
+        </div>
+        <div class="row">
+            <!--.col-sm-3label Client Name-->
+            <div class="col-sm-6"><label>SMS</label></div>
+            <div class="col-sm-6"><label>Email</label></div>
+        </div>
+        <div class="row mgb-20">
+            <div class="col-sm-6" style="margin-bottom: 20px">
+                <select style="font-weight:bold; text-align:right; font-size:14px; width:100%; padding:10px"
+                    ng-model="selectedSMS"
+                    ng-change="model.getSMSContent(selectedSMS)"
+                    ng-options="item.name for item in Items">
+                </select>
+            </div>
+            <div class="col-sm-6" style="margin-bottom: 20px">
+                <select style="font-weight:bold; text-align:right; font-size:14px; width:100%; padding:10px"
+                    ng-model="selectedEmail"
+                    ng-change="model.getEmailContent(selectedEmail)"
+                    ng-options="item.name for item in Items">
+                </select>
+            </div>
+
+        </div>
+        <div class="row mgb-20">
+            <div class="col-sm-6">
+                <textarea rows="10" style="resize: none;" class="form-control" id="sms" placeholder="Enter your own SMS message"
+                    ng-model="model.SMSContent"></textarea>
+            </div>
+            <div class="col-sm-6">
+                <textarea rows="10" style="resize: none;" class="form-control" id="email" placeholder="Enter your own Email message"
+                    ng-model="model.EmailContent"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <a href="javascript:void(0)" class="btn btn-primary" ng-click="model.SaveContent(selectedSMS, selectedEmail)">Save</a>
+            </div>
+        </div>
+    </div>
+</div>

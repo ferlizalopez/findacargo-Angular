@@ -1,0 +1,265 @@
+<div style="padding-top:0px;" class="wrapper wrapper-content animated fadeInRight deliveryrequest">
+        <div class="row wrapper white-bg page-heading" style="padding-top: 20px;border-bottom: 10px solid #f3f3f4">
+            <div class="col-sm-12">
+                <h2 style="margin-top:10px">{{'edit_return.edit' | translate}}</h2>
+                <ol class="breadcrumb">
+                    <li><a href="/">{{'edit_delivery.dashboard' | translate}}</a></li>
+                    <li><a ui-sref="weeklydeliveries">{{'edit_delivery.scheduled_deliveries' |
+                        translate}}</a></li>
+                    <li class="active"><strong>{{'edit_return.edit' |
+                        translate}}</strong></li>
+                </ol>
+            </div>
+        </div>
+        <inactivewarning></inactivewarning>
+        <form name="deliveryForm" ng-submit="model.UpdateRequest(deliveryForm, deliveryForm.$valid)" novalidate>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h4>{{('edit_delivery.general' |translate).toUpperCase()}}</h4>
+                        </div>                          
+                        <div class="ibox-content">
+                            <div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">{{'edit_delivery.status' | translate}}</label>
+                                    <div class="col-md-8">
+                                            <select class="form-control" style="min-height: 30px;" ng-model="deliveryStatus"
+                                            ng-options="obj.value as obj.name for obj in deliveryStatusOptions"></select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h4>{{('edit_return.recipient' | translate).toUpperCase()}}</h4>
+                        </div>   
+                        <div class="ibox-content">       
+                            <div> 
+                                <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">{{'edit_delivery.delivery_id' | translate}}</label>
+                                        <div class="col-md-8">
+                                            <input ng-model="delivery_id" name="delivery_id" type="text"
+                                            class="ng-pristine ng-untouched ng-valid form-control" disabled>                                           
+                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                        {{'edit_return.recipient_id' | translate}}
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input ng-model="recipient_id" name="recipient_id" type="text" 
+                                        class="ng-pristine ng-untouched ng-valid form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                        {{'edit_return.recipient_name' | translate}}
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input ng-model="recipient_name" name="recipient_name" type="text"
+                                            ng-attr-placeholder="{{'edit_delivery.name' | translate}}"
+                                            class="ng-pristine ng-untouched ng-valid form-control" disabled>
+                                        <p ng-show="deliveryForm.recipient_name.$invalid && !deliveryForm.recipient_name.$pristine"
+                                            class="error-block">{{'edit_return.recipient_name_req' | translate}}</p>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                        {{'edit_return.recipient_phone' | translate}}
+                                    </label>
+                                    <div class="col-md-2">
+                                        <select class="form-control" style="min-height: 30px;" ng-model="deliveryCountry"
+                                                ng-options="obj.value as obj.name for obj in deliveryCountryOptions" disabled></select>
+                                    </div>            
+                                    <div class="col-md-6">
+                                        <input ng-model="recipient_phone_number" name="recipient_phone_number" type="text"
+                                            class="ng-pristine ng-untouched ng-valid form-control" placeholder="xxxxxxxxxx" disabled>                                        
+                                    </div>            
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                        {{'edit_return.recipient_email' | translate}}
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input ng-model="recipient_email" name="recipient_email" type="email"
+                                            class="ng-pristine ng-untouched ng-valid form-control" placeholder="name@domain.com" disabled>                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h4>{{('edit_return.return_detail' | translate).toUpperCase()}}</h4>
+                        </div>   
+                        
+                        <!-- <div class="ibox-content">
+                            <div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                        {{'edit_return.return_location' | translate}}
+                                    </label>
+                                    <div class="col-md-8">
+                                        {{delivery_location_address}}
+                                    </div>    
+                                </div>
+                             
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                            {{'edit_return.return_date' | translate}}
+                                    </label>
+                                    <div class="col-md-8">
+                                        <div class="input-group date">
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                            <datepicker date-format="MMMM d, y" date-min-limit="model.minDate" required>
+                                                <input ng-model="delivery_date" class="form-control" name="delivery_date" type="text"
+                                                        style="height: 30px;" required/>
+                                                <p ng-show="deliveryForm.delivery_date.$invalid && !deliveryForm.delivery_date.$pristine"
+                                                    class="error-block">{{'edit_delivery.date_req' | translate}}</p>
+                                            </datepicker>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                            {{'edit_return.return_window' | translate}}
+                                    </label>
+                                    <div class="col-md-3">
+                                        <div data-autoclose="true" class="input-group clockpickerFromPick">
+                                            <input type="text"
+                                                ng-attr-placeholder="{{'edit_delivery.time_from' | translate}}"
+                                                ng-model="deliveryForm.delivery_window_start"
+                                                class="form-control"><span
+                                                class="input-group-addon"><span class="fa fa-clock-o"></span></span></div>
+                                    </div>
+                
+                                    <div class="col-md-1"
+                                            style="font-weight:bold; font-size:14px; line-height: 30px; max-width: 65px; ">
+                                        {{'edit_delivery.to' | translate}}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div data-autoclose="true" class="input-group clockpickerFromPick">
+                                            <input type="text"
+                                                ng-attr-placeholder="{{'edit_delivery.time_to' | translate}}"
+                                                ng-model="deliveryForm.delivery_window_end"
+                                                class="form-control"><span
+                                        class="input-group-addon"><span class="fa fa-clock-o"></span></span></div>
+                                    </div>
+                                </div>                                     
+                            </div>
+                        </div> -->
+                        <div class="ibox-content">
+                            <div>
+                                <div class="form-group row">
+                                    <label class="col-md-4 col-form-label">
+                                        {{'edit_return.return_location' | translate}}
+                                    </label>
+                                    <div class="col-md-8">
+                                        {{pickup_location_address}}
+                                    </div>    
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label" style="padding-top:25px">
+                                    {{'return_request.return_date' | translate}}
+                                </label>
+                            </div>
+                            <!-- <span style="font-weight:normal;padding-left: 80px; font-size: 16px;">{{'return_request.change_return_date' | translate}}</span> -->
+                            <div class="date-blocks content-center">
+                                <a style="padding-top:20px; padding-right:10px" href="javascript:void(0);" ng-click="model.prevWeek()"><em class="fa fa-4x fa-angle-left"></em></a>
+                                <div ng-repeat="block in model.dateBlocks" class="date-block" ng-class="{'active': block.active}" ng-click="model.setActiveDate(block.id)">
+                                    <div class="day-name">{{block.dayName}}</div>
+                                    <div class="day">{{block.day}}</div>
+                                    <div class="month-name">{{block.monthName}}</div>
+                                </div>
+                                <a style="padding-top:20px" href="javascript:void(0);" ng-click="model.nextWeek()"><em class="fa fa-4x fa-angle-right"></em></a>
+                            </div>
+                            <!-- <span style="font-weight:normal;padding-left: 80px; font-size: 16px;">{{'return_request.change_return_time' | translate}}</span> -->
+                            <div class="date-blocks content-center">
+                                <a style="padding-top:20px" href="javascript:void(0)" ng-click="model.moveLeft()"><em class="fa fa-4x fa-angle-left"></em></a>
+                                <div drag-scroll class="drag-scroll-row drag-scroll-row--x margin-space">
+                                    <div ng-repeat="block in model.timeBlocks" class="date-block" ng-class="{'active': block.active}" ng-click="model.setActiveTime(block.id)">
+                                        <div class="month-name">{{block.fromTimeHour}}:{{block.fromTimeMin}}</div>
+                                        <div class="day-name">and</div>
+                                        <div class="month-name">{{block.toTimeHour}}:{{block.toTimeMin}}</div>
+                                    </div>
+                                </div>
+                                <a style="padding-top:20px" href="javascript:void(0)" ng-click="model.moveRight()"><em class="fa fa-4x fa-angle-right"></em></a>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h4>{{('edit_return.return_warehouse' |translate).toUpperCase()}}</h4>
+                        </div> 
+                        <div class="ibox-content">
+                            <div class="form-group row">
+                                <label class="col-md-4 col-form-label">
+                                    {{'edit_return.return_warehouse' | translate}}
+                                </label>
+                                <div class="col-md-8">
+                                    <!-- <a href="javascript:void(0)"
+                                        ng-click="model.showPickupComponents()">{{pickup_location_address}}. <span
+                                            ng-if="!!deliveryForm.pickup_deadline && !!deliveryForm.pickup_deadline_to"> 
+                                            Between {{deliveryForm.pickup_deadline}} and {{deliveryForm.pickup_deadline_to}}</span></a> -->
+                                    {{delivery_location_address}}. 
+                                    <!-- <span ng-if="!!deliveryForm.pickup_deadline && !!deliveryForm.pickup_deadline_to"> 
+                                            Between {{deliveryForm.pickup_deadline}} and {{deliveryForm.pickup_deadline_to}}</span> -->
+                                </div>
+                            </div>
+
+            
+                            <!-- <div class="form-group row" ng-show="model.pickup_components_showed">
+                                <label class="col-md-4 col-form-label">
+                                    {{'edit_delivery.pickup_window' | translate}}
+                                </label>
+                                <div class="col-md-3">
+                                    <div data-autoclose="true" class="input-group clockpickerFromPick"><input type="text"
+                                                                                                                ng-attr-placeholder="{{'edit_delivery.time_from' | translate}}"
+                                                                                                                ng-model="deliveryForm.pickup_deadline"
+                                                                                                                class="form-control"><span
+                                            class="input-group-addon"><span class="fa fa-clock-o"></span></span></div>
+                                </div>
+            
+                                <div class="col-md-1"
+                                        style="font-weight:bold; font-size:14px; line-height: 30px; max-width: 65px; ">
+                                    {{'edit_delivery.to' | translate}}
+                                </div>
+                                <div class="col-md-3">
+                                    <div data-autoclose="true" class="input-group clockpickerFromPick" data-align="right"><input type="text"
+                                                                                                                ng-attr-placeholder="{{'edit_delivery.time_to' | translate}}"
+                                                                                                                ng-model="deliveryForm.pickup_deadline_to"
+                                                                                                                class="form-control"><span
+                                            class="input-group-addon"><span class="fa fa-clock-o"></span></span></div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>    
+                <div class="col-md-12" style="padding:20px 0;border-top:1px solid #ccc">
+                    <div style="text-align:center;">
+                        <!-- <button style="padding:12px; font-weight:bold;" type="submit"
+                                    ng-disabled="deliveryForm.$invalid"
+                                    class="btn btn-primary"> {{'edit_return.update_return' | translate}}
+                        </button> -->
+                        <button style="padding:12px; font-weight:bold;" type="submit"
+                                    ng-disabled="model.set3hours"
+                                    class="btn btn-primary"> {{'edit_return.update_return' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            $('.clockpickerFromPick').clockpicker();
+        });
+    
+    </script>

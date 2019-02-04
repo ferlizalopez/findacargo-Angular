@@ -1,0 +1,32 @@
+<div class="input-group" style="padding: 10px 20px;">
+        <input type="radio" name="search" ng-model="model.searchOption" value="id"> By label ID
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="search" ng-model="model.searchOption" value="normal">By others(name, address, delivery ID etc)
+</div>
+<div class="autocomplete-search" style="margin-top:10px">
+    <div class="input-group">
+        <input type="text" class="form-control" ng-model="model.value" ng-attr-placeholder="{{'home.search_placeholder' | translate}}"
+               auto-complete="model.autoCompleteOptions"/>
+        <div class="input-group-btn">
+            <button class="btn btn-primary" ng-click="model.search()" translate="home.search">Search</button>
+        </div>
+    </div>
+</div>
+
+<div class="container" >
+    <h2 ng-if="model.resultText"> {{model.resultText}} </h2>
+    <div class="search-results-container" ng-if="model.items.length > 0">
+        <a class="autocomplete-search-result-item" href="/#!/deliverydetails/{{item.deliveryId}}" ng-repeat="item in model.items">
+            <div class="value-part">
+                <div class="item-value">{{item.matchedProperty.value}}</div>
+                <div class="small-text">{{item.matchedProperty.name}}</div>
+            </div>
+            <div class="status-part">
+                <div class="item-status-value {{item.status.color}} {{!item.status.name ? 'full-height' : ''}}">
+                    {{item.status.value}}
+                </div>
+                <div class="small-text">{{item.status.name}}</div>
+            </div>
+        </a>
+    </div>
+</div>

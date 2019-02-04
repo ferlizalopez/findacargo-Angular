@@ -1,0 +1,12 @@
+node_modules/
+excel_uploads/
+image_upload/
+npm-debug.log.*
+.idea/
+*.swp
+*.swo
+*.DS_Store
+.vscode
+views/config.js
+yarn.lock
+uploads/

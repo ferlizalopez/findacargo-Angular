@@ -1,0 +1,112 @@
+<nav role="navigation" class="navbar-default navbar-static-side">
+    <div class="sidebar-collapse">
+        <ul id="side-menu" class="nav metismenu">
+            <li style="padding: 3px 1%;" class="dropdown profile-element">
+                <a href="/#!/home">
+                    <img src="img/logo-color.png" class="img-responsive fc-logo">
+                </a>
+            </li>
+            <li id="car">
+                <a data-toggle="collapse" data-target="#carNav" href="javascript:void(0)" id="cargo">
+                    <i class="fa fa-car"></i>
+                    <span class="nav-label">{{'navbar.deliveries' | translate}}</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse" id="carNav">
+                    <!-- <li>
+                        <a ui-sref="weeklydeliveries">{{'navbar.weekly_plan' | translate}}</a>
+                    </li> -->
+                    <li ng-repeat="department in departments">
+                        <a ng-href="#!/weekly/{{department.name}}">{{department.default?'*':''}}{{department.name}}</a>
+                    </li>
+                    <li id="newrequest">
+                        <a ui-sref="deliveryrequest">{{'navbar.add_delivery_request' | translate}}</a>
+                    </li>                    
+                    <!--<li>
+                        <a ui-sref="weeklyreturns">{{'navbar.returns_overview' | translate}}</a>
+                    </li>
+                    <li>
+                        <a ui-sref="returnrequest">{{'navbar.add_return_request' | translate}}</a>
+                    </li>-->
+                    <!-- <li>
+                        <a ui-sref="plannedpickups">{{'navbar.pickups_dropshipping' | translate}}</a>
+                    </li> -->
+                </ul>
+            </li>
+            <!--TODO Found where to do-->
+            <li id="return" ng-show="showReturn">
+                <a data-toggle="collapse" data-target="#returnNav" href="javascript:void(0)">
+                    <i class="fa fa-car"></i>
+                    <span class="nav-label">{{'navbar.returns' | translate}}</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse" id="returnNav">
+                    <li>
+                        <a ui-sref="weeklyreturns">{{'navbar.overview' | translate}}</a>
+                    </li>
+                    <li>
+                        <a ui-sref="returnrequest">{{'navbar.add_return_request' | translate}}</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li><a href="/contacts" id="contact"><i class="fa fa-phone"></i><span data-i18n="sidebar.contacts" class="nav-label">Contacts</span></a></li> 
+            <li>
+                 <a href="/chat" id="chat"><i class="fa fa-comments"></i><span data-i18n="sidebar.chat" class="nav-label">Chat</span></a>
+                
+                 (class=category == 'trip' ? "active" : (category == 'cargo' ? "active" : (category == 'fleet' ? "active" : ""))
+            </li> -->
+            <li id="ratings">
+                <a ui-sref="ratings">
+                    <i class="fa fa-thumbs-up"></i>
+                    <span class="nav-label">{{'navbar.ratings_and_feedback' | translate}}</span>
+                </a>
+            </li>
+            <li id="bussiness">
+                <a data-toggle="collapse" data-target="#bussinessNav" href="javascript:void(0)" id="bussinessSettings">
+                    <i class="fa fa-briefcase"></i>
+                    <span class="nav-label">{{'navbar.business_settings' | translate}}</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse" id="bussinessNav">
+                    <!--<li>
+                        <a ui-sref="roles">{{'navbar.roles' | translate}}</a>
+                    </li>-->
+                    <li>
+                        <a ui-sref="coworkers">{{'navbar.team' | translate}}</a>
+                    </li>
+                    <li>
+                        <a ui-sref="departments">{{'navbar.departments' | translate}}</a>
+                    </li>
+                    <li>
+                        <a ui-sref="notifications">{{'navbar.clients' | translate}}</a>
+                    </li>
+                    <!-- <li>
+                        <a ui-sref="newnotification">{{'navbar.new_notifications' | translate}}</a>
+                    </li> -->
+                    <li>
+                        <a ui-sref="userpickupsettings">{{'navbar.pickup' | translate}}</a>
+                    </li>
+                    <!-- <li>
+                        <a ui-sref="accountStatement">{{'navbar.account_statement' | translate}}</a>
+                    </li> -->
+                </ul>
+            </li>
+            
+            <li id="dev">
+                <a data-toggle="collapse" data-target="#developNav" href="javascript:void(0)" id="developers">
+                    <i class="fa fa-server"></i>
+                    <span id="develop" class="nav-label">{{'navbar.development' | translate}}</span>
+                    <span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level collapse" id="developNav">
+                    <li>
+                        <a ui-sref="userapisettings">{{'navbar.api_keys' | translate}}</a>
+                    </li>
+                    <li>
+                        <a ui-sref="integrations">{{'navbar.integrations' | translate}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

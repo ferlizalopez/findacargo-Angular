@@ -1,0 +1,29 @@
+<div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99"
+         style="transform: translate3d(100%, 0px, 0px);">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+</div><h1 class="logo-name"><a href="http://Nemlevering.com"><img src="img/main_logo.png"></a>
+</h1>
+<div class="middle-box text-center loginscreen animated fadeInDown"><h2 class="text-bold">ALMOST THERE<br><br>PLEASE
+    CHANGE YOU PASSWORD</h2>
+    <div class="alert alert-success" ng-show="model.showSuccess">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        {{model.message}}
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <form id="securityForm" method="POST" class="form-horizontal" novalidate="novalidate">
+            <div class="form-group">
+                <div class="col-sm-12"><input type="password" placeholder="New Password" ng-model="model.password"
+                                              required="" class="form-control" aria-required="true"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12"><input type="password" placeholder="Confirm Password" name="confirmpass"
+                                              required="" class="form-control" aria-required="true" ng-model="model.confirmPassword"></div>
+            </div>
+            <input id="user_submit" type="submit"
+                   style="border-radius:40px;        -moz-border-radius: 40px; -webkit-border-radius: 40px;background-color:red"
+                   value="Update Password" class="btn btn-danger full-width" ng-click="model.changePass()"></form>
+    </div>
+</div>

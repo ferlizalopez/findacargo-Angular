@@ -1,0 +1,61 @@
+<div class="text-center step-pay">
+    <h1>{{'payment.pay_title' | translate}}</h1>
+
+    <p class="payment-tip title">{{'payment.your_pricing' | translate}}</p>
+
+    <table class="payment-pricing">
+      <tr class="average-tr">
+          <td>{{'payment.average_deliveries' | translate}}</td>
+          <td>0 - 19</td>
+          <td>20 - 49</td>
+          <td>50 - 79</td>
+          <td>80 - 99</td>
+          <td>100 - 499</td>
+          <td>500+</td>
+      </tr>
+      <tr>
+            <td class="red-cell-table">{{'payment.price_per_drop' | translate}}</td>
+            <td>72 kr.</td>
+            <td>70 kr.</td>
+            <td>66 kr.</td>
+            <td>52 kr.</td>
+            <td>49 kr.</td>
+            <td>47 kr.</td>
+      </tr>
+    </table>
+
+
+    <p class="payment-tip title"><b>{{'payment.start_fee' | translate}}</b> 9,000 kr + moms (11.250 kr)</p>
+    <p class="payment-tip title"><b>{{'payment.minimum_monthly_spend' | translate}}</b> 20,000 kr + moms</p>
+    <p class="payment-tip title"><b>{{'payment.referral_bonus' | translate}}</b> {{'payment.win' | translate}}</p>
+
+    <button type="button" style="margin: 20px 0 5px 0;" data-toggle="modal" data-target="#paymentModal" class="btn btn-success">{{'payment.pay_now' | translate}}</button>
+
+    <p class="payment-tip">{{'payment.start_fee_paid' | translate}} <br> {{'payment.monthly_payments' | translate}}</p>
+
+</div>
+
+
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body"
+                 style="padding-bottom: 50px">
+                <form ng-submit="ctrl.submitPayment($event)" id="payment-form">
+                    <div class="form-row">
+                        <label for="card-element">
+                            {{'payment.credit_debit_card' | translate}}
+                        </label>
+                        <div id="card-element" style="max-width: 500px;">
+                            <!-- A Stripe Element will be inserted here. -->
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-success">{{'payment.pay' | translate}}</button>
+                </form>
+                <div id="card-errors" ng-if="ctrl.error" role="alert">{{ctrl.error}}</div>
+            </div>
+        </div>
+    </div>
+</div>

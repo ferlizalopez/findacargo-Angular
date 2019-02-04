@@ -1,0 +1,10 @@
+<a class="auto-complete autocomplete-search-result-item" href="/#!/deliverydetails/{{item.deliveryId}}">
+    <div class="value-part">
+        <div class="item-value">{{item.matchedProperty.value}}</div>
+        <div class="small-text">{{item.matchedProperty.name}}</div>
+    </div>
+    <div class="status-part">
+        <div class="item-status-value {{item.status.color}} {{!item.status.name ? 'full-height' : ''}}">{{item.status.value}}</div>
+        <div class="small-text">{{item.status.name}}</div>
+    </div>
+</a>

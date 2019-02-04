@@ -1,0 +1,29 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>{{'api_settings.api_keys' | translate}}</h2>
+            <ol class="breadcrumb">
+                <li><a href="/">{{'api_settings.dashboard' | translate}}</a></li>
+                <li><a ui-sref="">{{'api_settings.development' | translate}}</a></li>
+                <li class="active"><strong>{{'api_settings.api_keys' | translate}}</strong></li>
+            </ol>
+        </div>
+</div>
+    <div class="wrapper wrapper-content">
+        <div class="ibox-content" style="padding-bottom: 50px">
+            <div class="input-group">
+                <label for="key">{{'api_settings.private_key' | translate}}</label>
+                <input type="text" id="key" ng-attr-type="{{ model.showKey ? 'text' : 'password' }}" class="form-control" disabled  ng-model="model.apikey">
+                <span style="vertical-align: bottom;" class="input-group-btn">
+                    <button ng-click="model.changeSecure()" class="btn btn-default">
+                        <span ng-class="{'glyphicon-eye-close': model.showKey, 'glyphicon-eye-open': !model.showKey, 'glyphicon': true}" aria-hidden="true"></span>
+                    </button>
+                </span>
+                <span style="vertical-align: bottom;" class="input-group-btn">
+                    <button ng-click="model.regenerate()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-refresh"  aria-hidden="true"></span>
+                    </button>
+                </span>
+            </div>  
+
+        </div>
+    </div>

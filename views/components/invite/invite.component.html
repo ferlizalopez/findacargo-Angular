@@ -1,0 +1,81 @@
+<div style="padding-top:0px;" class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div style="text-align:center; display: flex" class="ibox-title d-flex">
+                    <div class="col-md-11">
+                        <h2 style="float:none;"><span style="font-weight:normal;">{{'invite_coworkers.invite_others' |
+                                translate}}</span></h2>
+                        <p>{{'invite_coworkers.new_members_receive_email' | translate}}</p>
+                    </div>
+                    <!-- <div class="col-md-1 button-container-header text-right">
+                        <button class="btn btn-primary" ng-click="model.addNew()">{{'clients_notifications.add_client'
+                            | translate}}</button>
+                    </div> -->
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="alert alert-success" ng-show="model.showSuccess">
+                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{model.showMsg}}
+                                </div>
+                                <table id="editable" class="table no-border">
+                                    <tbody>
+                                        <tr class="gradeX" ng-repeat="member in model.members">
+                                            <td>
+                                                <label>{{'invite_coworkers.name' |
+                                                    translate}}</label>
+                                                <br>
+                                                <input ng-model="member.name" type="text" class="form-control ng-pristine ng-untouched ng-valid"
+                                                    placeholder="">
+                                                <span ng-if="!member.success&&member.display" class="alert alert-danger" style="padding: 1px 5px;">{{'invite_coworkers.sorry_user_exists'
+                                                    | translate}}</span>
+                                                <span ng-if="member.success&&member.display" class="alert alert-success" style="padding: 1px 5px;">{{'invite_coworkers.user_invited'
+                                                    | translate}}</span>
+                                            </td>
+                                            <td>
+                                                <label>{{'invite_coworkers.email_address'
+                                                    | translate}}</label>
+                                                <br>
+                                                <input ng-model="member.email" type="email" placeholder="name@domain.com" class="form-control ng-pristine ng-untouched ng-valid">
+                                            </td>
+                                            <td style="width:150px">
+                                                <label>Country Code</label>
+                                                <br>
+                                                <select ng-model="member.ccode" placeholder="Country Code" class="form-control m-b ng-pristine ng-untouched ng-valid"
+                                                    ng-options="obj.value as obj.name for obj in countryOptions">
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <label>{{'invite_coworkers.phone' | translate}}</label>
+                                                <br>
+                                                <input ng-model="member.phone" type="number"  placeholder="0123456789" class="form-control ng-pristine ng-untouched ng-valid">
+                                            </td>
+                                            <td class="center" style="width:30%">
+                                                <label>{{'invite_coworkers.type_of_user'
+                                                    | translate}}</label>
+                                                <br>
+                                                <select ng-model="member.category" placeholder="User Type" class="form-control m-b ng-pristine ng-untouched ng-valid">
+                                                    <option value="admin">{{'invite_coworkers.admin' | translate}}</option>
+                                                    <option value="sales" selected="">{{'invite_coworkers.user_types' | translate}}</option>
+                                                    <!-- <option value="driver">Driver</option> -->
+                                                </select>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="col-md-12" style="padding:20px 0;border-top:1px solid #e7eaec">
+                                    <div style="text-align:center;">
+                                        <button style="padding:12px; font-weight:bold;" ng-click="model.invite()"
+                                            ng-disabled="!model.members[0].email ||  model.members[0].email.$invalid"  class="btn btn-info"> 
+                                            {{'invite_coworkers.invite_coworkers' | translate}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

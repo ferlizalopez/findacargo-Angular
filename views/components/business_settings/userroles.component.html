@@ -1,0 +1,51 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2 data-i18n="sidebar.schDel">User Roles</h2>
+            <ol class="breadcrumb">
+                <li><a ui-sref="index" data-i18n="body.Dashboard">Dashboard</a></li>
+                <li><a ui-sref="" data-i18n="sidebar.businessSettings">Business Settings</a></li>
+                <li class="active"><strong data-i18n="sidebar.roles">User Roles</strong></li>
+            </ol>
+        </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p>Roles define what permissions are granted to team members in your account</p>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-responsive table-striped">
+                            <tbody>
+                                <tr ng-repeat="role in model.roles">
+                                    <td col-md-3><strong>{{role.name}}</strong></td>
+                                    <td col-md-8>{{role.desc}}</td>
+                                    <td col-md-1>
+                                        <span  data-toggle="modal" data-target="#infoModal" ng-click="model.selectInfo(role)" class="glyphicon glyphicon-info-sign"></span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- infoModal -->
+  <div class="modal fade" id="infoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body"
+                style="padding-bottom: 60px">
+                    <h3>{{model.selected.name}}</h3>
+                    <p>{{model.selected.info}}</p>
+                    <a data-dismiss="modal" class="btn btn-success pull-right" style="padding: 5px 20 5px 20px; margin-top: 10px">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- infoModal -->

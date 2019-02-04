@@ -1,0 +1,163 @@
+<div class="row wrapper wrapper-content">
+    <div class="row">
+        <h1 class="text-center" style="margin: 0">{{'payment.company_details' | translate}}</h1>
+        <form name="stepForm" id="companyPaymentDetailsForm" ng-submit="model.sendRequest(stepForm, stepForm.$valid)"
+              novalidate>
+            <div class="">
+                <div class="col-md-12 top-30">
+                    <div class="col-md-2" style="font-weight:bold; text-align: right; font-size:14px;">
+                        CVR nr
+                    </div>
+                    <div class="col-md-10" style="padding: 0">
+                        <input ng-model="model.companyDetails.cvr_nr" name="cvr_nr" type="text"
+                               style=" padding:5px; border:1px solid #b2b2b2; border-radius:0px; width: 100%"
+                               required auto-complete="model.autoCompleteOptions">
+                        <p class="error-block" ng-show="stepForm.cvr_nr.$touched && stepForm.cvr_nr.$error.required">
+                            {{'payment.tell_cvr' | translate}}</p>
+                    </div>
+                </div>
+                <div class="col-md-12 top-30">
+                    <div class="col-md-2" style="font-weight:bold; text-align: right; font-size:14px;">
+                        {{'payment.company_name' | translate}}
+                    </div>
+                    <div class="col-md-10" style="padding: 0">
+
+                        <input ng-model="model.companyDetails.company_name" name="company_name" type="text"
+                               style=" padding:5px; border:1px solid #b2b2b2; border-radius:0px;width: 100%" required>
+                        <p class="error-block"
+                           ng-show="stepForm.company_name.$touched && stepForm.company_name.$error.required">{{'payment.tell_company_name' | translate}}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-12 top-30">
+                    <div class="col-md-2" style="font-weight:bold; text-align:right; font-size:14px;">
+                        {{'payment.company_address' | translate}}
+                    </div>
+
+                    <input id="company_address" ng-model="model.companyDetails.company_address.address"
+                           g-places-autocomplete
+                           name="company_address" type="text"
+                           style="padding:5px; border :1px solid #b2b2b2; border-radius:0px;" class="col-md-10" required
+                           ng-attr-placeholder="{{'payment.enter_address' | translate}}">
+                    <div class="col-md-2 top-10"></div>
+
+                    <div class="col-md-2" style="padding: 0; margin-top: 10px; padding-right: 10px;">
+                        <input id="company_address_street" ng-model="model.companyDetails.company_address.street"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom:1px solid #b2b2b2; border-radius:0px;"
+                               name="company_address_street"
+                               ng-attr-placeholder="{{'payment.enter_street_address' | translate}}" class="col-md-12"
+                               required>
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0 10px; margin-top: 10px">
+                        <input ng-model="model.companyDetails.company_address_floor" name="company_address_floor"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom:1px solid #b2b2b2; border-radius:0px;"
+                               ng-attr-placeholder="{{'payment.floor' | translate}}"
+                               class="col-md-12">
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0 10px; margin-top: 10px">
+                        <input id="company_address_zip" ng-model="model.companyDetails.company_address.zip" type="text"
+                               style="padding:5px; border: none; border-bottom :1px solid #b2b2b2; border-radius:0px;"
+                               name="company_address_zip"
+                               ng-attr-placeholder="{{'payment.zip' | translate}}" class="col-md-12"
+                               required>
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0 10px; margin-top: 10px">
+                        <input id="company_address_city" ng-model="model.companyDetails.company_address.city"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom :1px solid #b2b2b2; border-radius:0px;"
+                               name="company_address_city"
+                               ng-attr-placeholder="{{'payment.enter_city' | translate}}" class="col-md-12" required>
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0; padding-left: 10px; margin-top: 10px">
+                        <input id="company_address_country" ng-model="model.companyDetails.company_address.country"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom :1px solid #b2b2b2; border-radius:0px;"
+                               name="company_address_country"
+                               ng-attr-placeholder="{{'payment.enter_country' | translate}}" class="col-md-12" required>
+                    </div>
+
+                    <div ng-show="stepForm.company_address.$touched && stepForm.company_address.$error.required">
+                        <div class="col-md-2 top-10"></div>
+                        <p class="error-block">{{'payment.tell_company_address' | translate}}</p>
+                    </div>
+
+                </div>
+                <div class="col-md-12 top-30">
+                    <div class="col-md-2" style="font-weight:bold; text-align:right; font-size:14px;">
+                        {{'payment.pickup_address' | translate}}
+                    </div>
+                    <input id="pickup_address" ng-model="model.companyDetails.pickup_address.address"
+                           g-places-autocomplete
+                           name="pickup_address" type="text"
+                           style="padding:5px; border :1px solid #b2b2b2; border-radius:0px;" class="col-md-10" required
+                           ng-attr-placeholder="{{'payment.enter_address' | translate}}">
+                    <div class="col-md-2 top-10"></div>
+
+                    <div class="col-md-2" style="padding: 0; margin-top: 10px; padding-right: 10px;">
+                        <input id="pickup_address_street" ng-model="model.companyDetails.pickup_address.street"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom:1px solid #b2b2b2; border-radius:0px;"
+                               ng-attr-placeholder="{{'payment.enter_street_address' | translate}}" class="col-md-12"
+                               required>
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0 10px; margin-top: 10px">
+                        <input ng-model="pickup_address_floor" name="model.companyDetails.pickup_address.floor"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom:1px solid #b2b2b2; border-radius:0px;"
+                               ng-attr-placeholder="{{'payment.floor' | translate}}"
+                               class="col-md-12">
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0 10px; margin-top: 10px">
+                        <input id="pickup_address_zip" ng-model="model.companyDetails.pickup_address.zip"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom :1px solid #b2b2b2; border-radius:0px;"
+                               ng-attr-placeholder="{{'payment.zip' | translate}}" class="col-md-12"
+                               required>
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0 10px; margin-top: 10px">
+                        <input id="pickup_address_city" ng-model="model.companyDetails.pickup_address.city"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom :1px solid #b2b2b2; border-radius:0px;"
+                               ng-attr-placeholder="{{'payment.enter_city' | translate}}" class="col-md-12" required>
+                    </div>
+
+                    <div class="col-md-2" style="padding: 0; padding-left: 10px; margin-top: 10px">
+                        <input id="pickup_address_country" ng-model="model.companyDetails.pickup_address.country"
+                               type="text"
+                               style="padding:5px; border: none; border-bottom :1px solid #b2b2b2; border-radius:0px;"
+                               ng-attr-placeholder="{{'payment.enter_country' | translate}}" class="col-md-12" required>
+                    </div>
+
+
+                    <div ng-show="stepForm.pickup_address.$touched && stepForm.pickup_address.$error.required">
+                        <div class="col-md-2 top-10"></div>
+                        <p class="error-block">{{'payment.tell_pickup_address' | translate}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="buttons-payment-block">
+    <div class="text-center">
+        <button class="btn btn-primary"
+                ng-click="model.changeStep({val: false})">{{'payment.previous_step' | translate}}
+        </button>
+        <button class="btn btn-primary"
+                ng-disabled="!model.companyDetails.cvr_nr ||
+                !model.companyDetails.company_name || !model.companyDetails.company_address.address ||
+                !model.companyDetails.pickup_address.address" ng-click="model.changeStep({val: true})">{{'payment.next_step' | translate}}
+        </button>
+    </div>
+</div>

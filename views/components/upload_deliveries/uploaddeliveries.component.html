@@ -1,0 +1,189 @@
+<div class="wrapper wrapper-content animated fadeInRight" ng-show="deliverySettings">
+    <div class="row">
+            <div class="col-lg-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content text-center p-md">
+                        <h2><span class="text-navy"> {{'delivery_details.pickup_settting_define' | translate}}</span></h2>
+
+                        <p>or contact support@goidag.com for help.</p>
+                        
+                        <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3" style="float:inherit; margin-top: 20px">
+                            <a href="/#!/userpickupsettings" class="btn btn-primary btn-block">Click here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<div class="row wrapper border-bottom white-bg page-heading" ng-hide="deliverySettings">
+    <div class="col-lg-10">
+        <h2 data-i18n="sidebar.schDel">{{'daily_deliveries.scheduled_deliveries' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a ui-sref="index" data-i18n="body.Dashboard">{{'daily_deliveries.dashboard' | translate}}</a></li>
+            <li><a ui-sref="weeklydeliveries" data-i18n="sidebar.schDel">{{'daily_deliveries.scheduled_deliveries' | translate}}</a></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<div class="row" ng-hide="deliverySettings">
+    <div class="col-lg-12">
+        <div style="margin-top:15px;" class="ibox">
+            <div class="ibox-title">
+                <div style="overflow:auto; margin-top: 32px;" class="form-group">
+                    <div class="col-sm-offset-1 col-sm-6">
+                        <!-- Upload button -->
+                        <form ng-show="showUploader" name="upload_form" ng-submit="model.submit(upload_form.$valid)" role="form" id="upload_form" class="form-horizontal m-t-lg">
+                            <div class="form-group text-center">
+                                <label data-i18n="body.upload_file" class="control-label" style="margin-right:24px">{{'common.upload_file' | translate}}</label>
+                                <div style="display: inline-block;">
+                                    <input name="file" type="file" ng-model="model.file" ngf-select="model.onFileSelect()" accept=".xlsx,.xls" required="required" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group text-center">
+                                <div>
+                                    <button type="reset" data-i18n="body.cancel" ng-click="model.resetForm();" class="btn btn-white">{{'common.reset' | translate}}</button>
+                                    <button data-i18n="body.submit" type="submit" style="margin-left:10px;" ng-disabled="loader" class="btn btn-primary">{{'common.submit' | translate}}</button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- Progress Bar -->
+                        <div ng-show="showProgress" style="height: 350px;" class="ibox-content">
+                            <div ng-show="loader" id="loader" class="loader"><img src="img/loading_small.gif" class="loader-image" /><span></span>{{'common.processing_your_file' | translate}}</div>
+                            <div style="margin-top:100px;" class="row">
+                                <div style="width:500px;margin:0 auto;">
+                                    <h4>{{fileName}}<strong class="pull-right">{{fileSize}}</strong></h4>
+                                    <div style="height:10px;" class="progress">
+                                        <div style="width: {{progress}}%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="{{progress}}" role="progressbar" class="progress-bar progress-bar-success"><span class="sr-only">{{progress}}% {{'common.complete' | translate}} ({{'common.success_small' | translate}})</span></div>
+                                    </div>
+                                    <button style="margin-top:30px;" class="btn btn-primary">{{'common.cancel_upload' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-show="selectAllMappingField">
+                            <p class="font-bold alert alert-danger m-b-sm">
+                                <strong>{{'upload_delivery.mandatory_fields_required' | translate}}: </strong>
+                                <strong ng-repeat="m in missingFields track  by $index">
+                                    {{validationMapArr[m]}}<span ng-if="!$last">, </span>
+                                </strong>
+                            </p>
+                        </div>
+                        <!-- Mapping Dropdowns -->
+                        <div style="height: 2000px;" ng-show="showMatchDropdowns" class="ibox-content">
+                            <!-- <p>Please map fields. {{newHeaderArray}}</p> -->
+                            <div ng-show="mappingError">
+                                <p class="font-bold alert alert-danger m-b-sm" ng-repeat="m in mappingError">
+                                    {{m.value}} {{'upload_delivery.is_duplicate' | translate}}.
+                                </p>
+                            </div>
+                            <div ng-show="serverErrorMsg">
+                                <p class="font-bold alert alert-danger m-b-sm">
+                                    {{serverErrorMsg}}
+                                </p>
+                            </div>
+                            <div ng-show="invalidAddressArray">
+                                <p class="font-bold alert alert-danger m-b-sm" ng-repeat="invalidAddress in invalidAddressArray">
+                                    {{'upload_delivery.row_number' | translate}} {{invalidAddress.row}} : {{invalidAddress.address}} {{'upload_delivery.is_invalid_address' | translate}}.
+                                </p>
+                            </div>
+                            <div class="table-responsive">
+                                <div>
+                                    <table style="table-layout: fixed;width:100%;" class="table table-bordered">
+                                        <div style="text-align:right;">
+                                            <h5>{{'upload_delivery.select_action' | translate}}</h5>
+                                        </div>
+                                        <tbody>
+                                            <tr ng-repeat="(key,value) in deliveryKeys">
+                                                <td><strong>{{key}}</strong>
+                                                    <p>{{value}}</p>
+                                                </td>
+                                                <td>
+                                                    <select ng-change="model.createMapping(key,selectedMap.value, $index);" ng-model="selectedMap" ng-options="mapping as mapping.description for mapping in mappingArray track by mapping.value" class="form-control"></select>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <button ng-click="model.goBack()" class="btn btn-default">{{'common.back' | translate}}</button>
+                                    <button style="margin-left:5px;width:120px;" ng-click="model.next(newHeaderArray)" class="btn btn-primary">{{'common.next' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Address Errors -->
+                        
+                        
+
+                        <!-- Successfully Saved deliveries -->
+
+                    </div>
+                    <div class="col-sm-offset-1 col-sm-4">
+                        <!--<div class="info-text">
+                            <div id="suggestedFields">
+                                <p data-i18n="body.opt_mand_fields" class="hr-line-normal">Optional/Mandatory Fields</p>
+                                <ul>
+                                    <li>
+                                        <h4 data-i18n="body.mand_fields">Mandatory Fields</h4><span>DeliveryAddress 1,  RecipientPhone,  Delivery Date<br><br></span>
+                                    </li>
+                                    <li>
+                                        <h4 data-i18n="body.opt_fields">Optional Fields</h4><span>DeliveryDayofWeek, PickupAddress, DeliveryId, PickupDeadline, Rotes, DriverEmail, RecipientClientId, RecipientName, PickupZip,  DeliveryWindowstart, DeliveryWindowend, PickupCity, DeliveryLabel, DeliveryNumberOfPackages and DeliveryNotes</span>
+                                    </li>
+                                    <li>
+                                        <h4 data-i18n="body.opt_fields"><br>Notes:</h4><span><i>DeliveryZip and DeliveryCity are only mandatory if DeliveryAddress includes zip and city.</i></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>-->
+
+                        <div class="info-text-wrapper m-b-sm">
+                            <div>
+                                <div class="info-text-header gray-bg">
+                                    <h4 data-i18n="body.mand_fields">{{'upload_delivery.mand_fields' | translate}}</h4>
+                                </div>
+                                <div class="info-text-body">
+                                    <div class="info-text-cell">
+                                        <div ><span>{{'upload_delivery.pickup_address' | translate}}<br></span></div>
+                                        <div ><span>{{'upload_delivery.delivery_address' | translate}}<br></span></div>
+                                        <div ><span>{{'upload_delivery.delivery_day_week' | translate}}<br></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-text-wrapper m-b-sm">
+                            <div>
+                                <div class="info-text-header gray-bg">
+                                    <h4 data-i18n="body.opt_fields">{{'upload_delivery.opt_fields' | translate}}</h4>
+                                </div>
+                                <div class="info-text-body">
+                                    <div ng-repeat="optionalField in optionalFields track  by $index" class="info-text-cell" style="display: inline-block;">
+                                        <span>{{optionalField | translate}}<br></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Template excel file-->
+                        <div class="info-text-wrapper">
+                            <div class="info-text-header gray-bg">
+                                <h4 data-i18n="body.download_template">{{'upload_delivery.download_template' | translate}}</h4>
+                            </div>
+                            <div class="info-text-body">
+                                <a download="Template_to_upload_deliveries.xlsx" ng-href="{{'/uploads/Template_to_upload_deliveries.xlsx'}}">
+                                    Template_to_upload_deliveries.xlsx
+                                </a>
+                            </div>                            
+                        </div>
+                        
+                    </div>                    
+                </div>
+                <div class="hr-line-normal"></div>
+            </div>
+            <footer>
+                <!--include ./livechat.jade-->
+            </footer>
+        </div>
+    </div>
+</div>

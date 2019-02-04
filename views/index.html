@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Nemlevering | Easy, fast &amp; efficient Deliveries</title>
+    <!--<base href="/">-->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/plugins/clockpicker/clockpicker.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <!-- Gritter -->
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="js/angularModules/angular-datepicker/angular-datepicker.min.css" rel="stylesheet">
+    <link href="js/angularModules/places-autocomplete/autocomplete.min.css" rel="stylesheet">
+    <link href="js/angularModules/angular_toastr/angular-toastr.css" rel="stylesheet">
+    <link href="js/plugins/angular-auto-complete/angular-auto-complete.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body id="language" style="background-color:#293846" class=" pace-done" ng-app="app">
+<div id="spinner" style="display: none">
+    <div class="spinner">
+        <div class="center-logo">
+            <img ng-src="img/logo-color.png"/>
+        </div>
+    </div>
+    <div class="please-wait">LOADING...</div>
+</div>
+<div id="wrapper">
+    <buyer-nav></buyer-nav>
+</div>
+<div id="page-wrapper" class="gray-bg dashbard-1">
+    <div class="row border-bottom">
+        <header-nav></header-nav>
+    </div>
+    <ui-view></ui-view>
+</div>
+<!-- Underscore -->
+<script src="js/plugins/underscore/underscore-min.js"></script>
+<!-- Mainly scripts-->
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- iCheck-->
+<script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="js/inspinia.js"></script>
+<script src="js/plugins/pace/pace.min.js"></script>
+<script src="js/plugins/chart.js/dist/Chart.min.js"></script>
+<script src="js/plugins/clockpicker/clockpicker.js"></script>
+<script src="js/plugins/fullcalendar/moment.min.js"></script>
+<script src="js/plugins/fullcalendar/locale/da.js"></script>
+<!-- Angular -->
+<script src="js/angular/angular.js"></script>
+<script src="js/angular/angular-animate.min.js"></script>
+<script src="js/angular/angular-ui-router.js"></script>
+<script src="js/angular/ui-bootstrap-tpls-2.5.0.min.js"></script>
+<!-- Socket.io -->
+<script src="js/plugins/socket.io-client/socket.io.slim.js"></script>
+<script src="js/plugins/angular-socket-io/socket.min.js"></script>
+<!-- Auto-complete -->
+<script src="js/plugins/angular-auto-complete/angular-auto-complete.js"></script>
+<script src="js/plugins/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="js/plugins/angular-translate/angular-translate.js"></script>
+<script src="js/plugins/angular-translate/angular-translate-loader-static-files.js"></script>
+<script src="js/plugins/angular-chart.js/dist/angular-chart.min.js"></script>
+<script src="js/plugins/ng-drag-scroll/ng-drag-scroll.js"></script>
+
+<script src="js/jquery.dataTables.min.js"></script>
+
+
+<!-- Uploader -->
+<script src="js/angularModules/ng-file-upload.min.js"></script>
+<script src="js/angularModules/ng-file-upload-shim.min.js"></script>
+
+<!--Stripe.js-->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- Angular Datepicker -->
+<script src="js/angularModules/angular-datepicker/angular-datepicker.min.js"></script>
+<!-- Google places Autocomplete -->
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyADQx4-dsxmzj6jP1pH__Wb6xl9nYdO2Es"></script>
+<script src="js/angularModules/places-autocomplete/autocomplete.min.js"></script>
+<!-- Angular Toastr -->
+<script src="js/angularModules/angular_toastr/angular-toastr.js"></script>
+<!-- Angular Files -->
+<script src="config.js"></script>
+<script src="app.js"></script>
+<script src="app.run.js"></script>
+<script src="services/auth.service.js"></script>
+<script src="services/status.service.js"></script>
+<script src="services/delivery.service.js"></script>
+<script src="services/date.service.js"></script>
+<script src="services/spinner.service.js"></script>
+<script src="services/utility.service.js"></script>
+<script src="services/url.service.js"></script>
+<script src="services/socket.service.js"></script>
+<script src="services/storage.service.js"></script>
+
+<script src="filters/startFrom.filter.js"></script>
+
+<script src="components/navbars/buyer-nav.component.js"></script>
+<script src="components/navbars/header-nav.component.js"></script>
+<script src="components/payment/payment-steps.component.js"></script>
+<script src="components/payment/payment-step-when.component.js"></script>
+<script src="components/payment/payment-step-where.component.js"></script>
+<script src="components/payment/payment-step-details.component.js"></script>
+<script src="components/payment/payment-step-type.component.js"></script>
+<script src="components/payment/payment-step-pay.component.js"></script>
+<script src="components/payment/payment-step-company-details.component.js"></script>
+<script src="components/home/home.component.js"></script>
+<script src="components/clientSearch/client-search.component.js"></script>
+<script src="components/pickups/planned_pickups.component.js"></script>
+<script src="components/buyer/buyer.component.js"></script>
+<script src="components/invite/invite.component.js"></script>
+<script src="components/invite/changepass.component.js"></script>
+<script src="components/deliverydetails/deliverydetails.component.js"></script>
+<script src="components/returns/weeklyreturns.component.js"></script>
+<script src="components/returns/dailyreturns.component.js"></script>
+<script src="components/returns/returndetails.component.js"></script>
+<script src="components/scheduled_deliveries/weeklydeliveries.component.js"></script>
+<script src="components/scheduled_deliveries/dailydeliveries.component.js"></script>
+<script src="components/coworkers/coworkers.component.js"></script>
+<script src="components/departments/departments.component.js"></script>
+<script src="components/notification_settings/notificationsettings.component.js"></script>
+<script src="components/newnotification/newnotification.component.js"></script>
+<script src="components/deliveryrequest/deliveryrequest.component.js"></script>
+<script src="components/statistics/statistics.component.js"></script>
+<script src="components/upload_deliveries/uploaddeliveries.component.js"></script>
+<script src="components/edit_deliveries/editdeliveries.component.js"></script>
+<script src="components/business_settings/userroles.component.js"></script>
+<script src="components/business_settings/accountStatement.component.js"></script>
+<script src="components/client_settings/notificationsettings.component.js"></script>
+<script src="components/client_settings/changepassword.component.js"></script>
+<script src="components/api_settings/apisettings.component.js"></script>
+<script src="components/pickup_settings/pickupsettings.component.js"></script>
+<script src="components/integrations/integrations.component.js"></script>
+<script src="components/inactive_warning/inactivewarning.component.js"></script>
+<script src="components/returnrequest/returnrequest.component.js"></script>
+<script src="components/edit_returns/editreturns.component.js"></script>
+<script src="components/ratings/ratings.component.js"></script>
+</body>
+
+</html>

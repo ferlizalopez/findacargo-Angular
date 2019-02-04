@@ -1,0 +1,44 @@
+{
+  "name": "dashboard",
+  "version": "1.0.0",
+  "description": "Nemlevering Web Dashboard",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://dbshikhar@bitbucket.org/findacargo_vcs/dashboard.git"
+  },
+  "author": "Shikhar Dubey",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/findacargo_vcs/dashboard#readme",
+  "dependencies": {
+    "angular-translate": "^2.17.0",
+    "angular-translate-loader-static-files": "^2.17.0",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "crypto": "^1.0.1",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.15.3",
+    "jsonwebtoken": "^7.4.1",
+    "mailgun-js": "^0.11.2",
+    "method-override": "^2.3.9",
+    "mongodb": "^2.2.28",
+    "mongoose": "^4.10.6",
+    "morgan": "^1.8.2",
+    "multer": "^1.3.0",
+    "node-async-loop": "^1.2.2",
+    "node-geocoder": "^3.22.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-jwt": "^2.2.1",
+    "passport-oauth2": "^1.4.0",
+    "path": "^0.12.7",
+    "request": "^2.85.0",
+    "stripe": "^5.7.0",
+    "xlsx": "^0.11.3"
+  }
+}

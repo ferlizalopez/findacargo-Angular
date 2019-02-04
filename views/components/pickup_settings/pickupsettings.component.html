@@ -1,0 +1,82 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2 data-i18n="sidebar.schDel">{{'pickup_settings.pickup_addresses' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="/" data-i18n="body.Dashboard">{{'pickup_settings.dashboard' | translate}}</a>
+            </li>
+            <li>
+                <a ui-sref="" data-i18n="sidebar.bussinessSettings">{{'pickup_settings.business_settings' | translate}}</a>
+            </li>
+            <li class="active">
+                <strong data-i18n="sidebar.pickup">{{'pickup_settings.pickup' | translate}}</strong>
+            </li>
+        </ol>
+    </div>
+    <div class="col-lg-2">
+        <button ng-click="model.addAddress()" style="margin-top:30px;margin-bottom:10px;" class="btn btn-primary">
+            {{'pickup_settings.new' | translate}}
+        </button>
+    </div>
+</div>
+<div class="wrapper wrapper-content">
+    <div class="ibox-content">
+        <div class="table-responsive" ng-show="model.bufAddresses.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th width="10%">{{'pickup_settings.number' | translate}}</th>
+                        <th width="60%">{{'pickup_settings.address' | translate}}</th>
+                        <th width="10%">{{'pickup_settings.default' | translate}}</th>
+                        <th width="10%">{{'pickup_settings.return_address' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="address in model.bufAddresses" class="ng-scope">
+
+                        <td>{{$index + 1}}</td>
+
+                        <td ng-show="!address.editMode" class="col-lg-2">{{address.value}}</td>
+                        <td ng-show="address.editMode" class="col-lg-2">
+                            <input placeholder="Location" required="" class="form-control" g-places-autocomplete ng-model="address.value" autocomplete="off"
+                                id="addr" />
+                        </td>
+
+                        <td style="text-align: center">
+                            <input type="checkbox" ng-disabled="!address.editMode" style="width:30px; height: 30px" ng-model="address.default" ng-change="model.changeDefault($index)"
+                                id="default">
+                        </td>
+
+                        <td style="text-align: center">
+                            <input type="checkbox" ng-disabled="!address.editMode" style="width:30px; height: 30px" ng-model="address.default_for_return" ng-change="model.changeReturnDefault($index)"
+                                id="default">
+                        </td>
+
+                        <td class="col-lg-2" style="text-align:right">
+                            <div ng-if="!address.editMode">
+                                <button class="btn btn-info glyphicon glyphicon-pencil" ng-click="model.editView(address)"></button>
+                                <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="model.deleteAddress($index)"></button>
+                            </div>
+                            <div ng-if="address.editMode">
+                                <button class="btn btn-danger" ng-click="model.closeEditView(address);">{{'pickup_settings.done' | translate}}
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                </button>
+                                <button class="btn btn-danger glyphicon glyphicon-remove" ng-click="model.closeEditView(address)"></button>
+                            </div>
+
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-show="!model.bufAddresses.length" class="white-bg dashboard-header">
+            <div style="width:80%;z-index: 100;margin: auto auto;" class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                <h3 data-i18n="body.no_pickups" class="font-bold">{{'pickup_settings.no_pickups' | translate}}</h3>
+                <div class="error-desc">
+                    <a ng-click="model.addAddress()">
+                        <span data-i18n="body.add_new_pickup">{{'pickup_settings.new_places' | translate}}&nbsp;</span>
+                    </a>{{'pickup_settings.can_be_used' | translate}}</div>
+            </div>
+        </div>
+    </div>

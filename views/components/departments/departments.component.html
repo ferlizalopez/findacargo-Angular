@@ -1,0 +1,69 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>{{'departments.departments' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/">{{'departments.dashboard' | translate}}</a></li>
+            <li><a ui-sref="">{{'departments.business_settings' | translate}}</a></li>
+            <li class="active"><strong>{{'departments.departments' | translate}}</strong></li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="ibox-content">
+                <div style="border:0" class="ibox-title">
+                <div class="col-sm-4">
+                   <!--  -->
+                </div>
+                <div class="col-sm-8">
+                    <div class="pull-right invite_dropdown">
+                        <div> <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-primary" ng-click="model.addNew()">{{'departments.add_department' | translate}}</button></div>
+                    </div>
+                </div>
+            </div>
+        <div class="table-responsive" ng-if="model.departments.length > 0">
+            <form>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>{{'departments.department_name' | translate}}</th>
+                            <th>{{'departments.make_default' | translate}}</th>
+                            <th>{{'departments.type_of_deliveries' | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="department in model.departments">
+                            <td>
+                                <div ng-hide="department.editorEnabled"> {{ department.name }} </div>
+                                <div ng-show="department.editorEnabled">
+                                <input ng-model="department.name" ng-blur="model.save(department)">
+                                </div>
+                            </td>
+                            <td>
+                                <input type="checkbox" ng-model="department.default" ng-disabled="department.default" ng-click = "model.toggleCheckbox(this)"/>
+                            </td>
+                            <td>
+                                <div ng-hide="department.editorEnabled"> {{ department.typeOfDelivery }} </div>
+                                <div ng-show="department.editorEnabled">
+                                <select class="col-md-8" ng-model="department.typeOfDelivery" ng-options="type for type in model.deliveryTypes" ng-change="model.save(department)"/>
+                                </div>
+                            </td>
+                            <td style="text-align: right">
+                                    <button class="btn btn-primary" ng-click="model.edit(department)"><i class="fa fa-clipboard"></i> {{'departments.edit' | translate}}</button>
+                                 &nbsp; &nbsp;
+                                    <button class="btn btn-primary" ng-click="model.remove(department.name)" ng-disabled="department.default">{{'departments.delete' | translate}}</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>            
+        </div>
+        <div class="text-danger" ng-show="model.duplicatedError"><span>{{'departments.duplicated_name' | translate}}</div>
+        <div ng-hide="model.departments.length > 0" class="white-bg dashboard-header">
+            <div style="width:80%;z-index: 100;margin: auto auto;" class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                <h3 class="font-bold">{{'departments.no_departments_created' | translate}}</h3>
+                <div class="error-desc"><span>{{'departments.create_multiple' | translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>

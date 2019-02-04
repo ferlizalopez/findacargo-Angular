@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NemleveringLogin | Transport Details</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <link href="js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <link href="css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
+    <style type="text/css">.jqstooltip {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        visibility: hidden;
+        background: rgb(0, 0, 0) transparent;
+        background-color: rgba(0, 0, 0, 0.6);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+        color: white;
+        font: 10px arial, san serif;
+        text-align: left;
+        white-space: nowrap;
+        padding: 5px;
+        border: 1px solid white;
+        z-index: 10000;
+    }
+
+    .jqsfield {
+        color: white;
+        font: 10px arial, san serif;
+        text-align: left;
+    }</style>
+</head>
+<body id="language" style="background-color:#28282e" class="pace-done">
+<div class="pace  pace-inactive">
+    <div class="pace-progress" data-progress-text="100%" data-progress="99"
+         style="transform: translate3d(100%, 0px, 0px);">
+        <div class="pace-progress-inner"></div>
+    </div>
+    <div class="pace-activity"></div>
+</div><!--include ./lng-bar.jade--><h1 class="logo-name"><a href="http://Nemlevering.com"><img src="img/main_logo.png"></a>
+</h1>
+<div class="middle-box text-center loginscreen animated fadeInDown"><h2 class="text-bold">ALMOST THERE<br><br>PLEASE
+    CHANGE YOU PASSWORD</h2>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <form id="securityForm" method="POST" class="form-horizontal" novalidate="novalidate">
+            <div class="form-group">
+                <div class="col-sm-12"><input type="password" placeholder="New Password" name="password" id="password"
+                                              required="" class="form-control" aria-required="true"></div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12"><input type="password" placeholder="Confirm Password" name="confirmpass"
+                                              required="" class="form-control" aria-required="true"></div>
+            </div>
+            <input id="user_submit" type="submit"
+                   style="border-radius:40px;        -moz-border-radius: 40px; -webkit-border-radius: 40px;background-color:red"
+                   value="Update Password" class="btn btn-danger full-width"></form>
+    </div>
+</div>
+</body>
+</html>

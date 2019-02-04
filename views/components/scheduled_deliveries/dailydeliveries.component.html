@@ -1,0 +1,332 @@
+<style type="text/css">
+   .dashboard-header table  td {
+        vertical-align: middle;
+    }
+</style>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>{{'daily_deliveries.daily_deliveries' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/">{{'daily_deliveries.dashboard' | translate}}</a></li>
+            <li><a ui-sref="weeklydeliveries" >{{'daily_deliveries.scheduled_deliveries' | translate}}</a></li>
+            <li ng-if='!model.currentDepartment'><a ui-sref="weeklydeliveries">{{'daily_deliveries.weekly_plan' | translate}}</a></li>
+            <li ng-if='model.currentDepartment'><a ui-sref="weeklydeliveriesDepartment({departmentname : '{{model.currentDepartment}}'})">{{'daily_deliveries.weekly_plan' | translate}} |  {{model.currentDepartment}}</a></li>
+            <li class="active"><strong>{{'daily_deliveries.daily_deliveries' | translate}}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+    <div style="clear: both"></div>
+</div>
+<div class="row" style="margin-top:15px;">
+
+    <div class="col-lg-12">
+
+        <div style="border:0; padding-bottom: 16px;" class="ibox-title deliveries-statistic">
+            <div class="col-box text-center">
+                <div class="statistics-font">{{model.statistics.delivered}}</div>
+                <div>{{'daily_deliveries.delivered' | translate}}</div>
+            </div>
+            <div class="col-box text-center">
+                <div class="statistics-font">{{model.statistics.complete}}%</div>
+                <div>{{'daily_deliveries.complete' | translate}}</div>
+            </div>
+            <div class="col-box text-center" ng-if="model.statistics.last_delivery">
+                <div class="statistics-font">{{model.statistics.last_delivery}}</div>
+                <div>{{'daily_deliveries.last_done' | translate}}</div>
+            </div>
+        </div>
+        <div class="ibox">
+
+            <div class="filter-status-container white-bg" style="padding-top: 12px;">
+                 
+                <div class="pull-left inline" style="padding-left: 28px;padding-top: 12px;">
+                    <input class="inline delivery-checkbox" type="checkbox" ng-model="model.selectAll" ng-change="model.toggleSelectAll()">
+                    <!--<label>{{'daily_deliveries.select_all' | translate}}</label>-->
+                </div>
+                
+                <div ng-show="model.selectedItems" class="pull-left inline" style="padding-top: 16px;">
+                    <a ng-click="model.deleteSelected()">{{'daily_deliveries.delete' | translate}}</a>
+                </div>
+                <div ng-show="model.selectedItems" class="pull-left inline" style="padding-top: 16px;">
+                    <a data-toggle="modal" data-target="#changeDate">{{'daily_deliveries.change_date' | translate}}</a>
+                </div>
+                <div ng-show="model.selectedItems" class="pull-left inline" style="padding-top: 16px;">
+                    <a data-toggle="modal" data-target="#changeDepartment">{{'daily_deliveries.change_department' | translate}}</a>
+                </div>
+
+                <div class="pull-right inline" style="width: 72px;">
+                    <select ng-model="model.limit" ng-change="model.getDeliveries()"
+                            ng-options="elem for elem in [50, 100, 500]"
+                            class="m-b form-control m-b">
+                    </select>
+                </div>
+                <div class="pull-right inline" style="width: 180px;">
+                    <select ng-model="model.printedFilterStatus" ng-change="model.changeFilterStatus()"
+                            class="m-b form-control m-b">
+                        <option value="">{{'daily_deliveries.all_printed_statuses' | translate}}</option>
+                        <option ng-repeat="item in model.printedStatuses" value="{{item.id}}">{{item.value}}</option>
+                    </select>
+                </div>
+                <div class="pull-right inline" style="width: 150px;">
+                    <select ng-model="model.filterStatus" ng-change="model.changeFilterStatus()"
+                            class="m-b form-control m-b">
+                        <option value="">{{'daily_deliveries.all_statuses' | translate}}</option>
+                        <option ng-repeat="item in model.statuses" value="{{item.id}}">{{item.value}}</option>
+                    </select>
+                </div>
+                <div class="pull-right inline" style="width: 150px;">
+                        <button type="button" class="btn btn-primary ng-binding"  style="border-radius: 3px; margin-bottom: 10px;" ng-click="model.openMultipleLabelsSite(model.daily_deliveries)">
+                            {{'daily_deliveries.download_all_labels' | translate}}
+                        </button>
+                </div>
+            </div>
+            <div ng-show="!model.daily_deliveries.length && !model.filterStatus && !model.spinnerChecker.isVisible()" ng-cloak="ng-cloak"
+                 class="white-bg dashboard-header">
+                <div style="width:80%;z-index: 100;margin: auto auto;" ng-show="!alerts.length"
+                     class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                    <h3 class="font-bold">{{'daily_deliveries.no_delivery_planned' | translate}}</h3>
+                    <div class="error-desc"><span>{{'daily_deliveries.start_by_adding' | translate}}</span><a
+                            ui-sref="weeklydeliveries">{{'daily_deliveries.new_deliveries' | translate}}</a></div>
+                </div>
+            </div>
+            <div ng-show="!model.daily_deliveries.length && model.filterStatus && !model.spinnerChecker.isVisible()" ng-cloak="ng-cloak"
+                 class="white-bg dashboard-header">
+                <div style="width:80%;z-index: 100;margin: auto auto;" ng-show="!alerts.length"
+                     class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                    <h3 class="font-bold">{{'daily_deliveries.no_deliveries' | translate}}{{model.filterStatusName}}.</h3>
+                    <div class="error-desc">
+                        <span>
+                        <a ui-sref="deliveryrequest">
+                            {{'daily_deliveries.create_delivery' | translate}}
+                        </a> {{'daily_deliveries.or_change_filter' | translate}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div ng-show="model.daily_deliveries.length" class="white-bg dashboard-header dailydeliveries"  style="padding-top:0px;">
+                <div class="table-responsive grey-border-top">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width:2%"></th>
+                            <th style="width:10%">{{'daily_deliveries.deliveryid' | translate}}</th>
+                            <th style="width:10%">{{'daily_deliveries.name' | translate}}</th>
+                            <th style="width:15%">{{'daily_deliveries.delivery_address' | translate}}</th>                            
+                            <th style="width:10%">{{'daily_deliveries.phone' | translate}}</th>
+                            <th style="width:3%">{{'daily_deliveries.zone' | translate}}</th>
+                            <th style="width:5%" class="text-center">{{'daily_deliveries.boxes' | translate}}</th>
+                            <th style="width:5%">{{'daily_deliveries.status' | translate}}</th>
+                            <th style="width:10%">{{'delivery_details.est_time' | translate}}</th>
+                            <th style="width:5%; text-align: right;">{{'daily_deliveries.printed' | translate}}</th>
+                            <th style="width:30%"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="d in model.daily_deliveries track by $index">
+                            <td style="font-size: 12px; vertical-align: middle;">
+                                <input type="checkbox" class="delivery-checkbox" ng-model="d.isSelected" ng-change="model.toggleSelectDelivery(d)">                                
+                            </td>
+                            <td style="font-size: 12px; vertical-align: middle;">                                
+                                <!-- <a href="/#!/deliverydetails/{{d._id}}" ng-click="model.setdeliverydetails(d)"><span>{{ d.deliveryid == ''? d._id : d.deliveryid}}</span></a> -->
+                                <a href="/#!/deliverydetails/{{d._id}}" ng-click="model.setdeliverydetails(d)">
+                                    <span>
+                                    {{ (d.deliveryid === '1' || d.deliveryid === ''  || !d.deliveryid) ? model.limitedLengthFormat(d._id, 20) : model.limitedLengthFormat(d.deliveryid, 20)}}
+                                    </span>
+                                </a>
+                            </td>
+                            <td style="vertical-align: middle;"><span> {{d.recipientname}}</span></td>
+                            <td style="vertical-align: middle;"><span> {{model.extractAddress1(d.deliveryaddress) + ' ' + d.deliveryaddress2 + ' ' + d.deliveryzip + ' ' + d.deliverycity}}</span>
+                            </td>                            
+                            <!-- <td style="vertical-align: middle;"><span ng-if="d.recipientphone.phone"> {{model.formatPhone(d.recipientphone.country_dial_code + ' ' + d.recipientphone.phone)}}</span> -->
+                            <td style="vertical-align: middle;"><span ng-if="d.recipientphone.phone"> {{model.formatPhone(d.recipientphone.country_dial_code, d.recipientphone.phone)}}</span>
+                                <span ng-if="!d.recipientphone.phone">  N/A </span>
+                            </td>
+                            <td class="text-right" style="vertical-align: middle;">{{d.zone}}</td>
+                            <td class="text-center" style="vertical-align: middle;">{{d.deliverynumberofpackages}}</td>
+                            <td style="vertical-align: middle;width: 10%;">
+                                <div ng-class="{'text-green': (d.status == 1 || d.status == 2 || d.status == 3)}">
+                                    <div class="font-weight-bold">{{model.getStatus(d.status)}}</div>
+                                    <div ng-if="d.delivered_at"> Delivered at {{model.getLocalDanTime(d.delivered_at)}}</div>
+                                </div>
+                            </td>
+                            <td style="vertical-align: middle;">
+                                <p ng-if="d.estimated_delivery_time" class="{{(d.status == 3) ? 'green' : 'red'}}">
+                                    <!-- {{d.estimated_delivery_time}}</p> -->
+                                    {{model.getDeliveryEstimatedTime(d.estimated_delivery_time)}}</p>
+                                <p ng-if="!d.estimated_delivery_time" class="{{(d.status == 3) ? 'green' : 'red'}}">
+                                    <!-- {{d.deliverywindowstart}} - {{d.deliverywindowend}}</p> -->
+                                    {{model.getDeliveryWindowTime(d.deliverywindowstart, d.deliverywindowend)}}</p>
+                            </td>
+                            <!-- <td><span> {{d.deliverylabel}}</span></td> -->
+                            <td class="text-center" style="vertical-align: middle;">
+                                <div class="form-check">
+                                    <input style="width: 30px; height: 30px;" class="form-check-input" type="checkbox" ng-model="d.printed" ng-change="model.setPrinted(d)">
+                                </div>
+                            </td>
+                            <td class="btn-group list-btn" role="group" style="vertical-align: middle;display: flex; " >
+                                <button type="button" ng-click="model.selectToSend(d._id)" data-toggle="modal" data-target="#sendNotificationModal" class="btn btn-primary"
+                                    style="border-radius: 3px; ">
+                                    <span class="glyphicon glyphicon-envelope"></span>
+                                </button>
+                                <a type="button" href="/#!/deliverydetails/{{d._id}}">
+                                    <button style="border-radius: 3px; " class="btn btn-primary">
+                                        <i class="fa fa-binoculars"></i> 
+                                        <!-- {{'daily_deliveries.view' | translate}} -->
+                                    </button>
+                                </a>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#boxModal" style="border-radius: 3px;" ng-click="model.openLabel(d)">
+                                    {{'daily_deliveries.label' | translate}}
+                                </button>
+                                <button ng-show="d.status==3" type="button" class="btn btn-primary" style="border-radius: 3px;" ng-click="model.returnDelivery(d)">
+                                <!-- <button type="button" class="btn btn-primary" style="border-radius: 3px;" ng-click="model.returnDelivery(d)"> -->
+                                    {{'daily_deliveries.return' | translate}}
+                                </button>
+                                <div class="btn-group" role="group">
+                                    <style type="text/css">
+                                        .invite_dropdown.open {
+                                            position: relative;
+                                        }
+                            
+                                        .invite_dropdown.open ul li {
+                                            width: 60px;
+                                            display: inline-block;
+                                        }
+                                        
+                                    </style>
+                                    <div class="dropdown">
+                                        <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="btn btn-info dropdown-toggle">
+                                            {{'daily_deliveries.actions' | translate}}  &nbsp;
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" style="position:absolute; right: 0px;">
+                                            <li ng-show="d.deletable" >
+                                                <a href="/#!/delivery/{{d._id}}/edit">{{'daily_deliveries.edit' | translate}}</a>
+                                            </li>
+                                            <li ng-show="d.deletable" >
+                                                <a ng-click="model.deleteDelivery(d._id) ">{{'daily_deliveries.delete' | translate}}</a>
+                                            </li>
+                                            <li>
+                                                <a ng-click="model.returnDeliveryDo(d) ">{{'daily_deliveries.return' | translate}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="text-center">
+                        <ul uib-pagination
+                            total-items="model.totalItems"
+                            ng-model="model.currentPage"
+                            max-size="5"
+                            first-text="<<"
+                            next-text=">"
+                            last-text=">>"
+                            previous-text="<"
+                            items-per-page="model.limit"
+                            ng-change="model.getDeliveries()"
+                            class="pagination-sm"
+                            boundary-links="true"
+                            num-pages="model.numPages"></ul>
+                    </div>
+                </div>
+                <!-- boxModal -->
+                <div class="modal fade" id="boxModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                <div class="text-center">{{'daily_deliveries.how_many_boxes' | translate}}</div>
+                                <div class="text-center action-row">
+                                    <i class="fa fa-minus" ng-click="model.changeBoxesCount(false)"></i>
+                                    <input type="number" ng-model="model.currentLabel.deliverynumberofpackages"
+                                           min="1"
+                                           ng-blur="model.setBoxesCount()">
+                                    <i class="fa fa-plus" ng-click="model.changeBoxesCount(true)"></i>
+                                </div>
+                                <a ng-click="model.openLabelsSite()"
+                                   data-dismiss="modal"
+                                   class="btn btn-primary">{{'daily_deliveries.print_label' | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- boxModal -->
+
+                 <!-- sendNotificationModal -->
+                <div class="modal fade" id="sendNotificationModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body" 
+                                    style="padding-bottom: 50px">
+                                    <div ng-if="model.deliveryNotificated.display">
+                                        <div ng-class="{'alert-danger': !model.deliveryNotificated.success, 'alert-success': model.deliveryNotificated.success, 'alert': true}" role="alert">{{model.deliveryNotificated.message}}</div>
+                                    </div>
+                                    <div class="form-group" style="display: none;">
+                                        <label for="notifPattern">{{'daily_deliveries.select_message' | translate}}</label>
+                                        <select ng-model="model.notificationMessage" id="notifPattern" class="form-control">
+                                            <option ng-repeat="pattern in model.notificationPatterns" value="{{pattern}}">{{pattern}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" ng-if="model.notificationMessage === 'Other'">
+                                        <label for="notifMessage">{{'daily_deliveries.enter_your_message' | translate}}</label>
+                                        <textarea maxlength="160" rows="3" style="resize: none;" class="form-control" id="notifMessage" placeholder="Enter your own message" ng-model="model.customNotificationMessage"></textarea>
+                                    </div>
+                                    <button ng-disabled="!model.approved" ng-click="model.sendNotifications()" class="btn btn-primary pull-right">{{'daily_deliveries.send_notification' | translate}}</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <!-- sendNotificationModal -->
+
+                <!-- changeDepartmentModal -->
+                <div class="modal fade" id="changeDepartment" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body" 
+                                style="padding-bottom: 50px">                                
+                                <div class="form-group">
+                                    <label for="department">
+                                        {{'edit_delivery.departments' | translate}}
+                                    </label>
+                                    <select class="form-control" id="department"
+                                            ng-model="model.assignedDepartment"
+                                            ng-options="dep.name as dep.name for dep in departments"></select>
+                                </div>
+                                
+                                
+                                <button type="button" class="btn btn-default pull-right m-l-sm" data-dismiss="modal">{{'common.close' | translate}}</button>
+                                <button ng-disabled="!model.assignedDepartment" ng-click="model.changeDepartmentSelected()" class="btn btn-primary pull-right">{{'daily_deliveries.change_department' | translate}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- changeDepartmentModal -->
+
+                <!-- changeDateModal -->
+                <div class="modal fade" id="changeDate" tabindex="-1" role="dialog">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="height:172px;">
+                            <div class="modal-body" 
+                                style="padding-bottom: 50px">                                
+                                <div class="form-group">
+                                    <label for="delivery_date">
+                                        {{'edit_delivery.date' | translate}}
+                                    </label>
+                                    <datepicker  date-format="MMMM d, y" date-min-limit="model.minDate" style="padding-bottom:16px;">
+                                        <input class="form-control" id="delivery_date" ng-model="model.assignedDate" name="delivery_date" type="text" autocomplete="off" required/>
+                                    </datepicker>
+                                    <button type="button" class="btn btn-default pull-right m-l-sm" data-dismiss="modal">{{'common.close' | translate}}</button>
+                                    <button ng-disabled="!model.assignedDate" ng-click="model.changeDateSelected()" class="btn btn-primary pull-right">{{'daily_deliveries.change_date' | translate}}</button>
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- changeDateModal -->
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="text-center ">
+    <h1>{{'payment.more_details' | translate}}</h1>
+
+    <p class="payment-tip">{{'payment.finalize' | translate}}</p>
+
+    <form name="form" id="paymentDetailsForm"
+          novalidate>
+        <div class="">
+            <div class="col-md-12 top-30">
+                <div class="col-md-2" style="font-weight:bold; text-align: right; font-size:14px;">
+                    {{'payment.name' | translate}}
+                </div>
+                <div class="col-md-10" style="padding: 0">
+                    <input ng-model="ctrl.details.name" name="name" type="text"
+                           style="padding:5px; border:1px solid #b2b2b2; border-radius:0px; width: 100%"
+                           required>
+                    <p class="error-block" ng-show="form.name.$touched && form.name.$error.required"> {{'payment.name_req' | translate}}</p>
+                </div>
+            </div>
+            <div class="col-md-12 top-30">
+                <div class="col-md-2" style="font-weight:bold; text-align: right; font-size:14px;">
+                    {{'payment.phone' | translate}}
+                </div>
+                <div class="col-md-10" style="padding: 0">
+                    <input ng-model="ctrl.details.phone" name="phone" type="text"
+                           style="padding:5px; border:1px solid #b2b2b2; border-radius:0px; width: 100%"
+                           required>
+                    <p class="error-block" ng-show="form.phone.$touched && form.phone.$error.required">{{'payment.phone_req' | translate}}</p>
+                </div>
+            </div>
+            <div class="col-md-12 top-30">
+                <div class="col-md-2" style="font-weight:bold; text-align: right; font-size:14px;">
+                    E-mail
+                </div>
+                <div class="col-md-10" style="padding: 0">
+                    <input ng-model="ctrl.details.email" name="email" type="text"
+                           style="padding:5px; border:1px solid #b2b2b2; border-radius:0px; width: 100%"
+                           required>
+                    <p class="error-block" ng-show="form.email.$touched && form.email.$error.required">{{'payment.email_req' | translate}}</p>
+                </div>
+            </div>
+            <div class="col-md-12 top-30" style="margin-bottom: 20px;">
+                <div class="col-md-2" style="font-weight:bold; text-align: right; font-size:14px;">
+                    {{'payment.needs' | translate}}
+                </div>
+                <div class="col-md-10" style="padding: 0">
+                    <textarea ng-model="ctrl.details.needs" class="form-control" name="needs" rows="5"></textarea>
+
+                    <p class="error-block" ng-show="form.needs.$touched && form.needs.$error.required">{{'payment.needs_req' | translate}}</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="buttons-payment-block">
+    <div class="text-center">
+        <button class="btn btn-primary"
+                ng-click="ctrl.changeStep({val: false})">{{'payment.previous_step' | translate}}
+        </button>
+        <button class="btn btn-primary" ng-if="!ctrl.finishStep"
+                ng-disabled="!ctrl.details.needs ||
+                !ctrl.details.email || !ctrl.details.phone ||
+                !ctrl.details.name" ng-click="model.changeStep({val: true})">{{'payment.next_step' | translate}}
+        </button>
+        <button class="btn btn-success" ng-if="ctrl.finishStep"
+                ng-disabled="!ctrl.details.needs ||
+                !ctrl.details.email || !ctrl.details.phone ||
+                !ctrl.details.name"
+                ng-click="ctrl.finish()">{{'payment.finish' | translate}}
+        </button>
+    </div>
+</div>

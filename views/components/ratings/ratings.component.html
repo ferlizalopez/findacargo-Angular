@@ -1,0 +1,138 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <script src="js/plugins/fullcalendar/moment.min.js"/></script>
+    <div class="col-lg-10">
+        <h2>{{'delivery_rating.rating_and_feedback' | translate}}</h2>
+        <ol class="breadcrumb">
+            <li><a href="/">{{'weekly_returns.dashboard' | translate}}</a></li>
+            <!-- <li><a ui-sref="weeklyreturns">{{'weekly_deliveries.scheduled_deliveries' | translate}}</a></li> -->
+            <li class="active"><strong>{{'delivery_rating.rating_and_feedback' | translate}}</strong></li>
+        </ol>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
+<inactivewarning></inactivewarning>
+<div class="row">
+    <div class="col-lg-12">
+        <div style="margin-top:15px;" class="ibox">
+            <div class="white-bg dashboard-header">
+                <div id="lineChartContent">
+                    <!--<canvas id="canvas" style="height: 176px; width: 757px; margin-top: 20px;"></canvas>-->
+                </div>
+            </div>
+
+            <div ng-show="!model.ratings.length" ng-cloak="ng-cloak"
+                    class="white-bg dashboard-header">
+                <div style="width:80%;z-index: 100;margin: auto auto;" ng-show="!alerts.length"
+                    class="text-center animated fadeInRightBig ibox-content truncate fh-200 is-truncated">
+                    <h3 class="font-bold">{{'delivery_rating.no_ratings' | translate}}</h3>                  
+                </div>
+            </div>
+            <div class="ibox-content"  ng-show="model.ratings.length">
+                    <!-- <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th width="20%">{{'delivery_rating.delivery_id' | translate}}</th>
+                                <th width="10%">{{'delivery_rating.client_name' | translate}}</th>
+                                <th width="15%">{{'delivery_rating.client_address' | translate}}</th>
+                                <th width="15%">{{'delivery_rating.review' | translate}}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rating in model.ratings" class="ng-scope">
+                                    <td class="col-lg-2">{{rating.deliveryid}}</td>
+                                    <td class="col-lg-2">{{rating.client_name}}</td>
+                                    <td class="col-lg-2">{{rating.client_address}}</td>
+                                    <td class="col-lg-2">{{rating.review}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div> -->
+                <div class="table-responsive">
+                    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <div style="border:0; padding-bottom: 16px;" class="ibox-title deliveries-statistic">
+                            <div class="col-box text-center">
+                                <div class="statistics-font">{{model.totalCnt}}</div>
+                                <div>{{'delivery_rating.total' | translate}}</div>
+                            </div>
+                            <div class="col-box text-center">
+                                <div class="statistics-font">{{model.averageReview}}</div>
+                                <div>{{'delivery_rating.average_rating' | translate}}</div>
+                            </div>
+                        </div>
+                        <div class="filter-status-container white-bg">
+                            <div class="pull-right" style="display:flex">
+                                <select ng-model="model.selectedValue" ng-change="model.selectReview()" style="margin-right:20px"
+                                    class="m-b form-control m-b ">
+                                    <option value="0" selected>--All Review--</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                                <select ng-model="model.selectedStatus" ng-change="model.selectReview()" style="margin-right:20px"
+                                        class="m-b form-control m-b">
+                                    <option value="0">{{'daily_deliveries.all_statuses' | translate}}</option>
+                                    <option ng-repeat="item in model.statuses" value="{{item.id}}">{{item.value}}</option>
+                                </select>
+                                <div id="DataTables_Table_0_filter" class="dataTables_filter ">
+                                    <label>Search:
+                                        <input type="search" class="form-control" ng-model="model.search" ng-change="model.filterRatings()" style="font-weight: 400;">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <table style="word-break: break-all" class="table table-striped table-hover">
+                            <thead>
+                                <tr role="row">
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="delivery_id: activate to sort column ascending">
+                                        {{'delivery_rating.call_client' | translate}}
+                                    </th>
+                                    <th style="max-width:150px;" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="delivery_id: activate to sort column ascending">
+                                        {{'delivery_rating.delivery_id' | translate}}
+                                    </th>
+                                    <th style="max-width:150px;" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+                                        {{'delivery_rating.client_name' | translate}}
+                                    </th>
+                                    <th style="max-width:150px;" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending">
+                                        {{'delivery_rating.client_address' | translate}}
+                                    </th>
+                                    <th style="max-width:150px;" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending">
+                                        {{'delivery_rating.delivered_in' | translate}}
+                                    </th>
+                                    <th style="max-width:150px;" class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Address: activate to sort column ascending">
+                                        {{'delivery_rating.status' | translate}}
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Country: activate to sort column ascending"
+                                        style="max-width:150px;">{{'delivery_rating.review' | translate}}
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr role="row" class="odd" ng-repeat="rating in model.filteredRatings | startFrom:(model.currentPage-1)*model.limit | limitTo: model.limit">
+                                    <td style="font-size: 12px; vertical-align: middle;">
+                                        <input type="checkbox" class="delivery-checkbox">                                
+                                    </td>
+                                    <td style="max-width:150px;">                      
+                                        <a ng-if="rating.delivery_id" href="/#!/deliverydetails/{{rating.delivery_id}}"><span>{{rating.deliveryid}}</span></a>
+                                        <span ng-if="!rating.delivery_id" >{{rating.deliveryid}}</span>
+                                    </td>
+                                    <td style="max-width:150px;">{{rating.client_name}}</td>
+                                    <td style="max-width:150px;">{{rating.client_address}}</td>
+                                    <td style="max-width:150px;">{{model.showDate(rating.created)}}</td>
+                                    <td style="max-width:150px;">{{model.showStatus(rating)}}</td>
+                                    <td style="max-width:150px;">{{rating.review}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <ul uib-pagination total-items="model.totalItems" ng-model="model.currentPage" max-size="5" items-per-page="model.limit"
+                                class="pagination-sm" boundary-links="true" num-pages="model.numPages"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
