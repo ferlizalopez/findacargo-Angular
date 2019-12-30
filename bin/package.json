@@ -75,7 +75,7 @@
     "slug": "latest",
     "stylus": "0.51.1",
     "underscore": "^1.8.3",
-    "unicode": "^0.6.1",
+    "unicode": "^12.1.0",
     "universal-analytics": "^0.3.10",
     "voilab-pdf-table": "^0.2.0",
     "xls-to-json-lc": "^0.3.3",
