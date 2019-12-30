@@ -44,7 +44,7 @@
     "moment": "^2.10.3",
     "mongodb": "2.0.33",
     "mongoose": "latest",
-    "morgan": "~1.6.1",
+    "morgan": "~1.9.1",
     "mpath": "0.2.1",
     "mpromise": "^0.5.5",
     "mquery": "^1.6.3",
